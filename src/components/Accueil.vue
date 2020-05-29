@@ -13,6 +13,7 @@ export default {
     </section>
 
      <section id=create>
+         <p></p>
     </section>
 
     <p id="confMessage"> </p>
