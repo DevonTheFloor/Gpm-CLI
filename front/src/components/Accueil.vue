@@ -37,11 +37,11 @@ export default {
     loginuser (e){
       e.preventDefault();
       console.log("form submit");
-      let done ={
-          email: 'test',
-          mdp: 'ttttt'
+      let loginfo ={
+          email: ' ',
+          mdp: ' '
         }
-      this.axios.post('http://localhost:4040/api/auth/login',done
+      this.axios.post('http://localhost:4040/api/auth/login',loginfo
         )
           .then(function(response) {
             console.log(response),
