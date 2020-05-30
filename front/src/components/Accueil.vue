@@ -1,7 +1,67 @@
 <script>
 export default {
-  name: 'Accueil'
-}
+  name: 'Accueil',
+
+  data(){
+    return{
+      email: ' jean',
+      mdp: 'mdp '
+    }
+  },
+  methods:{
+    createUser(e){
+          e.preventDefault();
+          console.log("form submit");
+       
+        let adduser = {
+            email: this.email,
+            mdp: this.mdp
+        };
+        let newUser = JSON.stringify(adduser);
+        console.log("adduser = ", adduser);
+        let request = new XMLHttpRequest();
+        request.onload = function () {
+            if (this.readyState == 4) {
+              console.log("connexion a la bdd");
+              let response = JSON.parse(this.responseText);
+              console.log(response);
+              document.getElementById('confMessage').innerHTML = response.message;
+              console.log(response);
+            }
+        }
+    request.open("post","http://localhost:4040/api/auth/signup");
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(newUser);
+				}
+    },
+    loginuser (e){
+      e.preventDefault();
+      console.log("form submit");
+      let done ={
+          email: 'test',
+          mdp: 'ttttt'
+        }
+      this.axios.post('http://localhost:4040/api/auth/login',done
+        )
+          .then(function(response) {
+            console.log(response),
+            localStorage.setItem("email",response.data.email),
+            localStorage.setItem("token",response.data.token)
+            })
+            .then(()=>{
+              let token = localStorage.getItem('token');
+              this.axios.get('http://localhost:4040/api/',
+              { headers: 
+                {'Aunthorisation': 'Bearer '+token}},
+              )
+              .then( window.location.assign('http://localhost:4040/api/'))
+              .catch(()=>{console.log("erreur redirection")});
+              })
+          .catch(function (error) {
+            console.log(error);
+            });
+        }
+  }
 </script>
 
 <template>
