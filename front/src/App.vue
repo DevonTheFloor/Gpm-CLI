@@ -1,17 +1,25 @@
 <template>
   <div id="app">
-    <Accueil/>
+    <main>
+      <Accueil/>
+      <Signup/>
+      <Login/>
+    </main>
   </div>
 </template>
 
 <script>
 
 import Accueil from './components/Accueil'
+import Signup from './components/Signup'
+import Login from "./components/Login"
 
 export default {
   name: 'App',
   components: {
-    Accueil
+    Accueil,
+    Signup,
+    Login
   }
 }
 </script>

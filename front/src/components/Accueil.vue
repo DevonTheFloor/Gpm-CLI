@@ -1,98 +1,20 @@
 <script>
 export default {
+
   name: 'Accueil',
 
-  data(){
-    return{
-      email: ' ',
-      mdp: ' '
-    }
-  },
-  methods:{
-    createUser(e){
-          e.preventDefault();
-          console.log("form submit");
-       
-        let adduser = {
-            email: this.email,
-            mdp: this.mdp
-        };
-        let newUser = JSON.stringify(adduser);
-        console.log("adduser = ", adduser);
-        let request = new XMLHttpRequest();
-        request.onload = function () {
-            if (this.readyState == 4) {
-              console.log("connexion a la bdd");
-              let response = JSON.parse(this.responseText);
-              console.log(response);
-              document.getElementById('confMessage').innerHTML = response.message;
-              console.log(response);
-            }
-        }
-    request.open("post","http://localhost:4040/api/auth/signup");
-    request.setRequestHeader("Content-Type", "application/json");
-    request.send(newUser);
-				}
-    },
-    loginuser (e){
-      e.preventDefault();
-      console.log("form submit");
-      let loginfo ={
-          email: this.email,
-          mdp: this.mdp
-        }
-      this.axios.post('http://localhost:4040/api/auth/login',loginfo
-        )
-          .then(function(response) {
-            console.log(response),
-            localStorage.setItem("email",response.data.email),
-            localStorage.setItem("token",response.data.token)
-            })
-            .then(()=>{
-              let token = localStorage.getItem('token');
-              this.axios.get('http://localhost:4040/api/',
-              { headers: 
-                {'Aunthorisation': 'Bearer '+token}},
-              )
-              .then( window.location.assign('http://localhost:4040/api/'))
-              .catch(()=>{console.log("erreur redirection")});
-              })
-          .catch(function (error) {
-            console.log(error);
-            });
-        }
   }
+
 </script>
 
 <template>
-  <main>
+
     <section class="col-lg-12">
       <figure class="col-lg-8 offset-lg-2 " id="logo">
         <img class="img-fluid logoenter" src="../assets/image/logo/icon2.png" id="logokey" alt="icon groupomania" >
       </figure>
     </section>
 
-     <section id=create>
-         <p></p>
-    </section>
-
-    <p id="confMessage"> </p>
-
-    <section  class="justify-content-lg-center">
-      <form id="appform" >
-        <label for="email"> email: </label>
-        <input id="email" v-model="email" type="text" name="email">
-        <label for="name"> mot de passe : </label>
-        <input id="name" v-model="mdp" type="text" name="mdp">
-        <section>
-          <button id="btn-signup" type="submit" @click="createUser">Créer un compte</button>
-          <button id="btn-cnt" @click="loginuser" >Se connecter</button>
-        </section>
-      </form>
-    </section>
-
-    <section id="connected"></section>
-  </main>
 </template>
 
 <style lang="scss">
