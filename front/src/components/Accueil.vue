@@ -4,8 +4,8 @@ export default {
 
   data(){
     return{
-      email: ' jean',
-      mdp: 'mdp '
+      email: ' ',
+      mdp: ' '
     }
   },
   methods:{
@@ -38,8 +38,8 @@ export default {
       e.preventDefault();
       console.log("form submit");
       let loginfo ={
-          email: ' ',
-          mdp: ' '
+          email: this.email,
+          mdp: this.mdp
         }
       this.axios.post('http://localhost:4040/api/auth/login',loginfo
         )
