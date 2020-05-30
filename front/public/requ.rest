@@ -1,0 +1,8 @@
+POST http://localhost:4040/api/auth/login
+Content-Type: application/json
+
+{
+    "email":"test",
+    "mdp": "ttttt"
+}
+### 

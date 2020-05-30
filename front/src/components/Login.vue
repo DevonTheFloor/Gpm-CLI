@@ -29,19 +29,21 @@ export default {
       this.axios.post('http://localhost:4040/api/auth/login',loginfo
         )
           .then(function(response) {
-            console.log(response),
+            console.log(response.data),
             localStorage.setItem("email",response.data.email),
             localStorage.setItem("token",response.data.token)
+
             })
-            .then(()=>{
+            /*.then(()=>{
               let token = localStorage.getItem('token');
               this.axios.get('http://localhost:4040/api/',
               { headers: 
                 {'Aunthorisation': 'Bearer '+token}},
-              )
-              .then( window.location.assign('http://localhost:4040/api/'))
-              .catch(()=>{console.log("erreur redirection")});
-              })
+              )*/
+            .then( window.location.assign('/sommaire/'))
+              //.then(()=>{console.log("OKAAAAAAAAAy!!")})
+              /*.catch(()=>{console.log("erreur redirection")});
+              })*/
           .catch(function (error) {
             console.log(error);
             });
