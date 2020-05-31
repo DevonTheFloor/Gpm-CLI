@@ -41,7 +41,7 @@ export default {
               { headers: 
                 {'Aunthorisation': 'Bearer '+token}},
               )*/
-            .then( window.location.assign('/sommaire'))
+            .then( window.location.assign('http://localhost:8080/#/sommaire'))
               //.then(()=>{console.log("OKAAAAAAAAAy!!")})
               /*.catch(()=>{console.log("erreur redirection")});
               })*/

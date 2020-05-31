@@ -1,12 +1,13 @@
 <template>
 	<header>
-    <div class="head">
-      <a href="index.html">
+    <!--<div class="head">
+
         <div class="col-lg-8 offset-lg-2  hero" >
-        <img class="img-fluid" src="images/logo/ban2.png">
+        <img class="img-fluid" src="../assets/image/logo/ban2.png">
         </div>
-      </a>
-    </div> 
+
+    </div> -->
+    <p>HEADER</p>
   </header>
 </template>
 

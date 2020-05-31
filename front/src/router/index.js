@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Forum from '../views/Forum'
+//import Forum from '../views/Forum'
 import Sommaire from '../views/Sommaire'
+import Messageforum from '../views/Messageforum'
 
 Vue.use(VueRouter)
 
@@ -24,8 +25,13 @@ Vue.use(VueRouter)
   {
     path: '/forum',
     name: 'Forum',
-    component: Forum
-    //component: ()=> import('../views/Forums')
+    //component: Forum
+    component: ()=> import('../views/Forum')
+  },
+  {
+    path: '/Messageforum',
+    name: 'Messageforum',
+    component: Messageforum
   }
 ]
 

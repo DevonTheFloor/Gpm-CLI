@@ -10,7 +10,18 @@
 
 <script>
 export default {
-	name: 'Posteforum'
+  name: 'Posterforum',
+  data(){
+      return{
+        email: '',
+        mdp:'',
+        titre:'',
+        message:''
+      }
+    },
+    methods:{
+      poster(){}
+    }
 }
 </script>
 

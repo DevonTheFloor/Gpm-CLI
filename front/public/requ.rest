@@ -9,3 +9,9 @@ Content-Type: application/json
 GET http://localhost:4040/api/forum/posts
 
 ###
+GET http://localhost:4040/api/forum/post/14
+
+headers:{
+    "Authorization": "Bearer KSA29E432SVOkeAbarh3gIUzHp9OsjWmQdOdnAnC7Os"
+}
+###
