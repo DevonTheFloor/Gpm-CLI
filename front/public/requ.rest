@@ -6,3 +6,6 @@ Content-Type: application/json
     "mdp": "ttttt"
 }
 ### 
+GET http://localhost:4040/api/forum/posts
+
+###

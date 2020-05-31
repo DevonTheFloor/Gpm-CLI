@@ -4,8 +4,9 @@
         <label> email: <input id="email" v-model="email" type="text" name="email"></label>
         <label> mot de passe : <input id="name" v-model="mdp" type="text" name="mdp"></label>
         <br/>
-          <button id="btn-cnt" @click="loginuser" >Se connecter</button>
+          <button id="btn-cnt" @click="loginuser" > Se Connecter </button>
       </form>
+      <router-link to="sommaire">Sommaire</router-link>
     </section>
 </template>
 
@@ -40,7 +41,7 @@ export default {
               { headers: 
                 {'Aunthorisation': 'Bearer '+token}},
               )*/
-            .then( window.location.assign('/sommaire/'))
+            .then( window.location.assign('/sommaire'))
               //.then(()=>{console.log("OKAAAAAAAAAy!!")})
               /*.catch(()=>{console.log("erreur redirection")});
               })*/
