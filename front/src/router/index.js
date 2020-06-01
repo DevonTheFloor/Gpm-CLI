@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 //import Forum from '../views/Forum'
 import Sommaire from '../views/Sommaire'
 import Messageforum from '../views/Messageforum'
+import Chat from '../views/Chat'
+import Market from '../views/Market'
 
 Vue.use(VueRouter)
 
@@ -14,7 +16,7 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/sommaire/',
+    path: '/vous-etes-ici/',
     name: 'Sommaire',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -23,15 +25,25 @@ Vue.use(VueRouter)
     component: Sommaire
   },
   {
-    path: '/forum',
+    path: '/zi-forum',
     name: 'Forum',
     //component: Forum
     component: ()=> import('../views/Forum')
   },
   {
-    path: '/Messageforum',
+    path: '/voir-un-message',
     name: 'Messageforum',
     component: Messageforum
+  },
+  {
+    path: '/chat-live',
+    name: 'Chat',
+    component: Chat
+  },
+  {
+    path: '/market-place',
+    name: 'Market',
+    component: Market
   }
 ]
 

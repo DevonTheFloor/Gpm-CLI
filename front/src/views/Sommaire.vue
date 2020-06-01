@@ -1,15 +1,16 @@
 <template>
   <div class="sommaire">
+    <Head/>
     <p  @click="disconnection" class="disconnect"><router-link to="/">disconnect</router-link></p>
 
      <section class="menuSom">
-      <h2><router-link to="/forum">FORUM</router-link></h2>
+      <h2><router-link to="/zi-forum">FORUM</router-link></h2>
     </section >
       <section class="menuSom">
-      <h2><router-link to="/market">Market Place</router-link></h2>
+      <h2><router-link to="/market-place">Market Place</router-link></h2>
     </section >
       <section class="menuSom">
-      <h2><router-link to="/chat">Chat</router-link></h2>
+      <h2><router-link to="/chat-live">Chat</router-link></h2>
     </section>
 
   </div>

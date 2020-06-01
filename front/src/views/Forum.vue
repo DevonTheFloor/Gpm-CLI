@@ -1,7 +1,8 @@
 <template>
+  
   <!--<div id="messagesForum" class="forum  justify-content-lg-center " >-->
     <div class="forum" >
-    <Header/>
+      <Head/>
       <form v-if="seen" enctype="multipart/form-data">
         <input type="hidden" id="auteur" name="auteur" :value="email">
         <label>Titre : <input type="text" id="titre" name="titre" v-model="titre"> </label>
@@ -15,7 +16,7 @@
 
       <div class="listForum" v-for="item in info" :key="item.id">
         <button >X</button>
-        <a :href="'http://localhost:8080/#/Messageforum?id='+item._id"><h2> {{ item.titre }} </h2></a>
+        <a :href="'http://localhost:8080/#/voir-un-message?id='+item._id"><h2> {{ item.titre }} </h2></a>
         <p>par:  {{ item.auteur }} </p>
         <p> {{ item.message }} </p>
      </div>
@@ -26,8 +27,11 @@
 
 <script>
 
+import Head from '../components/Head.vue'
+
 export default {
     name: 'Forum',
+    components: Head,
     data(){
       return{
         info: '',
@@ -45,7 +49,24 @@ export default {
           this.seen = true;
           this.seeAll = false
         },
-        poster(){}
+        poster(e){
+          e.preventDefault();
+          let token = localStorage.getItem('token');
+          let email = localStorage.getItem('email');
+
+          this.axios.post("http://localhost:4040/api/forum/post",{
+             titre: this.titre,
+             auteur: email,
+             message : this.message
+           },{
+             headers:{
+               "Authorization":"Bearer "+token
+             }
+           })
+           .then(response =>{console.log(response)})
+           .catch(error => {console.log(error)});
+           location.reload(); 
+        }
     },
     mounted(){
 

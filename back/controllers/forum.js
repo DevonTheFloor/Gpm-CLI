@@ -6,7 +6,7 @@ exports.postOne = (req,res,next)=>{
     console.log("Connecté mySQL on Xampp !!");
     if(req.file){
         let titre = req.body.titre;
-        let auteur= "lautre";
+        let auteur= req.body.auteur;
         let message = req.body.message;
         let urlimg = "/api/images/dl/"+req.file.filename;
 
@@ -16,11 +16,11 @@ exports.postOne = (req,res,next)=>{
         connectdb.query(sql, function(err,result){
             if (err) throw err ;
             console.log("Message posté");
-            res.redirect("/api/forumVue.html");
+            res.redirect("http://localhost:8080/#/zi-forum");
         });
     } else {
         let titre = req.body.titre;
-        let auteur= "lautre";
+        let auteur= req.body.auteur;
         let message = req.body.message;
 
         var sql = "INSERT INTO forum (titre,auteur,message,quand) VALUES(?,?,?,NOW())";
@@ -29,7 +29,7 @@ exports.postOne = (req,res,next)=>{
         connectdb.query(sql, function(err,result){
             if (err) throw err ;
             console.log("Message posté");
-            res.redirect("/api/forumVue.html");
+            res.redirect("http://localhost:8080/#/zi-forum");
         });
     }
   
@@ -48,7 +48,8 @@ exports.getAll = (req,res,next)=>{
 
 exports.getOne = (req,res,next)=>{
 
-    let _id = req.params.id;
+    let _id = req.params._id;
+    //let _id=14;
     console.log("id = ",_id);
  
     console.log("Connecté mySQL on Xampp !!");
@@ -82,7 +83,7 @@ exports.resForum = (req,res,next)=>{
         connectdb.query(sql, function(err,result){
             if (err) throw err ;
 						console.log("Reponse posté");
-						res.redirect('/api/forum/post/'+id_question);
+						res.redirect('http:/localhost:8080/#/voir-un-message'+id_question);
         });
     }else{
         console.log('connecté response sans img');
@@ -99,8 +100,7 @@ exports.resForum = (req,res,next)=>{
         connectdb.query(sql, function(err,result){
             if (err) throw err ;
             console.log("Reponse posté");
-            res.redirect('/api/forum/post/'+id_question);
-
+            res.redirect('http:/localhost:8080/#/voir-un-message'+id_question);
         });
     }
 }
@@ -109,7 +109,8 @@ exports.getAllRes = (req,res,next)=>{
 
     console.log("Connecté mySQL on Xampp !!");
 		console.log("reponse forum linked");
-		let id_question = req.body.id_question;
+        //let id_question = req.body.id_question;
+        let id_question = 14;
 		var sql = "SELECT * FROM reponse WHERE salon='forum' AND id_question=? ";
 		var inserts = [id_question];
 		sql = mysql.format(sql,inserts);

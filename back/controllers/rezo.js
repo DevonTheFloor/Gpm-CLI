@@ -24,6 +24,6 @@ exports.postOne = (req,res,next)=>{
       connectdb.query(sql, function(err,result){
           if (err) throw err ;
           console.log("Message posté");
-          res.redirect("/api/rezo.html");
+          res.redirect("http://localhost:8080/#/chat-live");
       });
   }

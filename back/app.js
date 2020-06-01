@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-//app.use("/",express.static(path.join(__dirname, 'public')));
+app.use("/api/images/dl",express.static(path.join(__dirname, 'images')));
 app.use('/api/auth',usersRouter);
 //app.use("/api/", express.static(path.join(__dirname, 'front')));
 app.use('/api/test',testRouter);
