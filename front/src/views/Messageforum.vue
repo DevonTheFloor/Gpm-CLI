@@ -66,7 +66,7 @@ export default {
 
         let url3 = new URL(test,'http://localhost');
         let id = url3.searchParams.get('id');
-        console.log(id);
+        console.log("avant post id :",id);
       
         this.id_question = id;
           let token = localStorage.getItem('token');
