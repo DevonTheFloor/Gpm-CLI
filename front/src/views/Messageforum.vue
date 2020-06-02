@@ -125,13 +125,14 @@ export default {
           //requête post(auth) voir toutes les reponses d'un post choisi
         this.axios.post("http://localhost:4040/api/forum/reponse/all",{
           //id_question: this.id_question
-          id_question : 14
+          id_question : id
         },{
           headers:{
-              "Authorization":"Bearer "+this.token
+              "Authorization":"Bearer "+token
             }
         })
           .then(response => {
+            console.log("resAll :",response );
             this.resall = response.data;
             console.log("resAll:" ,response.data)})
           .catch(error => {console.log(error)});

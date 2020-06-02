@@ -3,7 +3,6 @@
   <!--<div id="messagesForum" class="forum  justify-content-lg-center " >-->
     <div class="forum" >
       <Head page="/#/vous-etes-ici"/>
-      <Login/>
       <form v-if="seen" enctype="multipart/form-data">
         <input type="hidden" id="auteur" name="auteur" :value="email">
         <label>Titre : <input type="text" id="titre" name="titre" v-model="titre"> </label>
