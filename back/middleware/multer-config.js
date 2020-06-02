@@ -2,14 +2,14 @@ const multer = require('multer');
 
 const MIME_TYPES = {
   'image/jpg': 'jpg',
-  'image/jpeg': 'jpg',
+  'image/jpeg': 'jpeg',
   'image/png': 'png',
   'image/gif': 'gif'
 };
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'images');
+    cb(null, '/images/');
   },
   filename: (req, file, cb) => {
     const name1 = file.originalname.split(' ').join('_');

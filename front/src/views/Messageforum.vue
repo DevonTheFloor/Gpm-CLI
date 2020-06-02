@@ -3,8 +3,9 @@
 	<div id="getOne" class=" Messageforum justify-content-lg-center " >
     <Head page='/#/zi-forum'/>
     <section class=" col-lg-10" v-for="item in info" :key="item.id">
-      <div class="listForum" >
-        <Deletebtn/>
+
+      <div class="listForum">
+        <Deletebtn v-if="del"/>
         <h2>{{ item.titre }} </h2>
         <p>Par : {{ item.auteur }}</p>
         <p>le: {{ item.quand }}</p>
@@ -55,12 +56,17 @@ export default {
         id: '',
         id_question: '',
         salon : "forum" ,
-        token:''
+        token:'',
+        del:''
       }
-    },Computed(){
-       
     },
+       
     methods:{
+      deleting(){
+        if(this.auteur == this.email){
+          this.del=true
+        }
+      },
       responseForum(e){
          e.preventDefault();
         //récupération de l'id du message dans l'url

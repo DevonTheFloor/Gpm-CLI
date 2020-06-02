@@ -1,12 +1,3 @@
-<script>
-export default {
-
-  name: 'Accueil',
-
-  }
-
-</script>
-
 <template>
 
     <section class="col-lg-12">
@@ -16,6 +7,15 @@ export default {
     </section>
 
 </template>
+
+<script>
+export default {
+
+  name: 'Accueil',
+
+  }
+
+</script>
 
 <style lang="scss">
 main {

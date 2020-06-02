@@ -2,23 +2,28 @@
   <div class="home">
     <img class="laclass" alt="Vue logo" src="../assets/logo.png">
     <Accueil/>
-    <Signup/>
-    <Login/>
+    <Connect/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Accueil from '@/components/Accueil.vue'
-import Signup from '@/components/Signup.vue'
-import Login from '@/components/Login.vue'
+import Connect from '@/components/Connect.vue'
+
 
 export default {
   name: 'Home',
   components: {
     Accueil,
-    Signup,
-    Login
+    Connect
+  },
+  mounted(){
+    let iscox = localStorage.getItem('email');
+    if(iscox){
+      window.location.assign('http://localhost:8080/#/vous-etes-ici');
+    }
+    
   }
 }
 </script>

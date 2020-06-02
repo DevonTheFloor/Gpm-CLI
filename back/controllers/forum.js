@@ -3,12 +3,12 @@ const connectdb = require('../queries/connectdb');
 
 exports.postOne = (req,res,next)=>{
 
-    console.log("Connecté mySQL on Xampp !!");
+    console.log("Connecté mySQL PostOne !!");
     if(req.file){
         let titre = req.body.titre;
         let auteur= req.body.auteur;
         let message = req.body.message;
-        let urlimg = "/api/images/dl/"+req.file.filename;
+        let urlimg = "http://localhost:4040/api/images/dl/"+req.file.filename;
 
         var sql = "INSERT INTO forum (titre,auteur,message,urlimg,quand) VALUES(?,?,?,?,NOW())";
         var inserts = [titre,auteur,message,urlimg];
@@ -37,7 +37,7 @@ exports.postOne = (req,res,next)=>{
 
 exports.getAll = (req,res,next)=>{
 
-    console.log("Connecté mySQL on Xampp !!");
+    console.log("Connecté mySQL on getAll !!");
     var qy1 = "SELECT * FROM forum";
     connectdb.query(qy1, function(err,result){
         if (err) throw err ;
@@ -52,7 +52,7 @@ exports.getOne = (req,res,next)=>{
     //let _id=14;
     console.log("id = ",_id);
  
-    console.log("Connecté mySQL on Xampp !!");
+    console.log("Connecté mySQL on GetOne !!");
     var sql = "SELECT * FROM forum WHERE _id=?";
 
     var inserts = [_id];
@@ -86,7 +86,7 @@ exports.resForum = (req,res,next)=>{
 						res.redirect('http:/localhost:8080/#/voir-un-message'+id_question);
         });
     }else{
-        console.log('connecté response sans img');
+        console.log('connecté response sans IMG');
         let auteur= req.body.auteur;
         let message = req.body.message;
         let id_question = req.body.id_question;
