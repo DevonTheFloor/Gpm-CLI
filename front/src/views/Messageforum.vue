@@ -4,6 +4,7 @@
     <Head page='/#/zi-forum'/>
     <section class=" col-lg-10" v-for="item in info" :key="item.id">
       <div class="listForum" >
+        <Deletebtn/>
         <h2>{{ item.titre }} </h2>
         <p>Par : {{ item.auteur }}</p>
         <p>le: {{ item.quand }}</p>
@@ -37,10 +38,14 @@
 
 <script>
 import Head from '../components/Head'
+import Deletebtn from '../components/Deletebtn'
 export default {
   
   name: 'Messageforum',
-  components:{ Head},
+  components:{
+    Head,
+    Deletebtn
+    },
 		data(){
 			return{
 				info : '',

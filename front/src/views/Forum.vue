@@ -15,7 +15,6 @@
       <button id="postforum" @click="seeform">Poster un message</button>
 
       <div class="listForum" v-for="item in info" :key="item.id">
-        <button >X</button>
         <a :href="'http://localhost:8080/#/voir-un-message?id='+item._id"><h2> {{ item.titre }} </h2></a>
         <p>par:  {{ item.auteur }} </p>
         <p> {{ item.message }} </p>
@@ -32,7 +31,7 @@ import Head from '../components/Head.vue'
 export default {
     name: 'Forum',
     components:{
-      Head
+      Head,
     } ,
     data(){
       return{

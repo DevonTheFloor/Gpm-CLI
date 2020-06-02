@@ -4,6 +4,7 @@
 	<Head page='/#/vous-etes-ici'/>
 	<section  class=" col-lg-6 of formForum"  v-for="article in annonce" :key="article.id">
     <div class="listForum">
+	<Deletebtn/>
       <a  href="/api/market/post/:id"><h4> {{article.titre}} </h4></a>
       <p> {{ article.annonce}} </p>
       <img class="picmarket" :src="article.urlimg">
@@ -14,10 +15,12 @@
 
 <script>
 import Head from '../components/Head'
+import Deletebtn from '../components/Deletebtn'
 export default {
 	name: 'Market',
 	components:{
-		Head
+		Head,
+		Deletebtn
 	},
 	data(){
 		return{
