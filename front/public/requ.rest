@@ -15,3 +15,13 @@ headers:{
     "Authorization": "Bearer KSA29E432SVOkeAbarh3gIUzHp9OsjWmQdOdnAnC7Os"
 }
 ###
+POST http://localhost:4040/api/forum/reponse
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QiLCJpYXQiOjE1OTEwOTk2NTYsImV4cCI6MTU5MTE4NjA1Nn0.F4C6ICOj5lVkSB2uOEiEqQFRfgxBn0m-YMjufurWLZM
+
+{
+    "id_question" : 14,
+    "auteur" : "Oim-D",
+   "message": "From req rest",
+    "salon": "forum"
+}

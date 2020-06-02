@@ -1,5 +1,7 @@
 <template>
+
 	<div id="getOne" class=" Messageforum justify-content-lg-center " >
+    <Head page='/#/zi-forum'/>
     <section class=" col-lg-10" v-for="item in info" :key="item.id">
       <div class="listForum" >
         <h2>{{ item.titre }} </h2>
@@ -8,7 +10,7 @@
         <p class="msgForum"> {{ item.message }} </p>
         <p><img :src="item.urlimg" class="imgMsg"></p>
         <p> </p>
-
+          
           <section class="reponseForum" v-for="res in resall" :key="res.id">
             <div class="listForum" >
               <p>Par : {{ res.auteur }} </p>
@@ -17,7 +19,6 @@
               <p> </p>
             </div>
           </section>
-
           <section>
             <form class="repForum" enctype="multipart/form-data">
               <input type="hidden" id="salon" name="salon" v-model="salon">
@@ -35,20 +36,60 @@
 </template>
 
 <script>
+import Head from '../components/Head'
 export default {
-	name: 'Messageforum',
+  
+  name: 'Messageforum',
+  components:{ Head},
 		data(){
 			return{
 				info : '',
         resall: '',
-        id_question: '',
         auteur : '',
         message : '',
-        salon : "forum" 
+        id: '',
+        id_question: '',
+        salon : "forum" ,
+        token:''
       }
+    },Computed(){
+       
     },
     methods:{
-      responseForum(){}
+      responseForum(e){
+         e.preventDefault();
+        //récupération de l'id du message dans l'url
+        let uri1 = document.location.href;
+        console.log(uri1);
+        let test = uri1.split('#')[1];
+        console.log('test :' ,test);
+
+        let url3 = new URL(test,'http://localhost');
+        let id = url3.searchParams.get('id');
+        console.log(id);
+      
+        this.id_question = id;
+          let token = localStorage.getItem('token');
+          console.log(token);
+          let name = localStorage.getItem('email');
+          this.auteur = name;
+
+          this.axios.post("http://localhost:4040/api/forum/reponse",{
+
+            id_question : this.id_question,
+            auteur : this.auteur,
+            message : this.message,
+            salon : this.salon
+          },
+          {
+            headers:{
+              "Authorization":"Bearer "+token
+            }
+          })
+          .then(response => {console.log(response)})
+          .catch(error => {console.log(error)});
+          location.reload();
+      }
       
     },
     mounted(){
@@ -56,23 +97,19 @@ export default {
         this.auteur = nameAuteur;
         let token = localStorage.getItem('token');
         //récupération de l'id du message dans l'url
-        let params = new URLSearchParams(document.location.search);
         let uri1 = document.location.href;
         console.log(uri1);
         let test = uri1.split('#')[1];
         console.log('test :' ,test);
-            console.log(params);
-            let url3 = new URL(test,'http://localhost');
-            let id = url3.searchParams.get('id');
-            console.log(id);
-        /*//
-        let _id = params.get("id");
-        //let _id = 14;
-        console.log('id= ' + _id);
-        this.id_question = _id;*/
+
+        let url3 = new URL(test,'http://localhost');
+        let id = url3.searchParams.get('id');
+        console.log(id);
+      
+        this.id_question = id;
 
         //requête get (auth) pour recupérer un message en fonction de l'id
-        this.axios.get(`http://localhost:4040/api/forum/post/${this._id}`,{
+        this.axios.get('http://localhost:4040/api/forum/post/'+id,{
           headers:{
             "Authorization":"Bearer "+token
           }
@@ -86,12 +123,12 @@ export default {
 					.then(function () {console.log('FINALY');});
         
           //requête post(auth) voir toutes les reponses d'un post choisi
-        this.axios.post("http;//localhost:4040/api/forum/reponse/all",{
+        this.axios.post("http://localhost:4040/api/forum/reponse/all",{
           //id_question: this.id_question
           id_question : 14
         },{
           headers:{
-              "Authorization":"Bearer "+token
+              "Authorization":"Bearer "+this.token
             }
         })
           .then(response => {
@@ -103,5 +140,16 @@ export default {
 </script>
 
 <style lang="scss">
+.repForum{
+  padding: 1%;
+  width: auto;
+  border: 1px solid rgb(243, 226, 185);
+  border-radius: 10px;
+  background-color: rgb(248, 206, 193);
+}
+.imgMsg{
+  max-width: 50%;
+  background-origin: 2px solid white;
+}
 
 </style>

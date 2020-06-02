@@ -1,5 +1,6 @@
 <template>
 <div >	
+  <Head class="headchat"/>
   <section class="justify-content-lg-center formForum chat"  id="message">
     <div v-for="tweet in chat" :key="tweet.id">
       <p>{{tweet.auteur}}</p>
@@ -21,11 +22,13 @@
 </template>
 
 <script>
-//import Header from '@/components/Header.vue'
-
+import Head from '../components/Head'
 export default {
-	name: 'Chat',
-	//components: Header,
+  name: 'Chat',
+  components:{
+    Head
+  },
+
 	data(){
 		return{
 			chat:'',
@@ -67,5 +70,8 @@ export default {
 }
 #message{
 	width: 70%;
+}
+.headchat{
+  margin: 5px;
 }
 </style>

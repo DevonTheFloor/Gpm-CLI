@@ -18,9 +18,13 @@
 
 <script>
 
-
+import Head from '../components/Head'
 export default {
+
   name: 'Sommaire',
+  components:{
+    Head
+  },
 methods:{
   disconnection(){
     localStorage.clear();

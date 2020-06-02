@@ -1,5 +1,7 @@
 <template>
+
 <div v-if="visible" class="market">
+	<Head page='/#/vous-etes-ici'/>
 	<section  class=" col-lg-6 of formForum"  v-for="article in annonce" :key="article.id">
     <div class="listForum">
       <a  href="/api/market/post/:id"><h4> {{article.titre}} </h4></a>
@@ -11,8 +13,12 @@
 </template>
 
 <script>
+import Head from '../components/Head'
 export default {
 	name: 'Market',
+	components:{
+		Head
+	},
 	data(){
 		return{
 			visible: true,

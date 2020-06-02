@@ -6,10 +6,12 @@ import Sommaire from '../views/Sommaire'
 import Messageforum from '../views/Messageforum'
 import Chat from '../views/Chat'
 import Market from '../views/Market'
+import Test from '../views/Test'
 
 Vue.use(VueRouter)
 
   const routes = [
+    
   {
     path: '/',
     name: 'Home',
@@ -44,10 +46,16 @@ Vue.use(VueRouter)
     path: '/market-place',
     name: 'Market',
     component: Market
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test
   }
 ]
 
 const router = new VueRouter({
+
   routes
 })
 
