@@ -3,6 +3,7 @@
     <img class="laclass" alt="Vue logo" src="../assets/logo.png">
     <Accueil/>
     <Connect/>
+    <Formlidate/>
   </div>
 </template>
 
@@ -10,13 +11,15 @@
 // @ is an alias to /src
 import Accueil from '@/components/Accueil.vue'
 import Connect from '@/components/Connect.vue'
+import Formlidate from '@/components/Formlidate.vue'
 
 
 export default {
   name: 'Home',
   components: {
     Accueil,
-    Connect
+    Connect,
+    Formlidate
   },
   mounted(){
     /*let iscox = localStorage.getItem('email');

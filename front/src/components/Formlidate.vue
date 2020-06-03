@@ -1,0 +1,44 @@
+<template>
+	<div>
+  <div class="form-group" :class="{ 'form-group--error': $v.email.$error }">
+    <label class="form__label">Email</label>
+    <input class="form__input" v-model.trim="$v.email.$model"/>
+  </div>
+  <div class="error" v-if="!$v.email.required">Field is required</div>
+  <div class="error" v-if="!$v.email.minLength">Name must have at least {{$v.name.$params.minLength.min}} letters.</div>
+  <tree-view :data="$v.Email" :options="{rootObjectKey: '$v.name', maxDepth: 2}"></tree-view>
+  <div class="form-group" :class="{ 'form-group--error': $v.maxDepth.$error }">
+    <label class="form__label">Mot de passe</label>
+    <input class="form__input" v-model.trim.lazy="$v.age.$model"/>
+  </div>
+  <div class="error" v-if="!$v.age.between">Must be between {{$v.age.$params.between.min}} and {{$v.age.$params.between.max}}</div><span tabindex="0">Blur to see changes</span>
+  <tree-view :data="$v.age" :options="{rootObjectKey: '$v.age', maxDepth: 2}"></tree-view>
+</div>
+</template>
+
+<script>
+import { required, minLength, helpers } from 'vuelidate/lib/validators'
+const alpha = helpers.regex('alpha', /@/)
+export default {
+	
+  data() {
+    return {
+      email: '',
+      mdp: 0
+    }
+  },
+  validations: {
+    email: {
+      required,
+			minLength: minLength(8),
+			helpers: alpha
+    },
+    mdp: {
+			required,
+			minLength: minLength(8)
+
+    }
+  }
+}
+
+</script>
