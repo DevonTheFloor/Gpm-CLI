@@ -1,6 +1,6 @@
 <template>
   <div class="sommaire">
-    <Head/>
+    <Head page="http://localhost:8080/"/>
     <p  @click="disconnection" class="disconnect"><router-link to="/">disconnect</router-link></p>
 
      <section class="menuSom">

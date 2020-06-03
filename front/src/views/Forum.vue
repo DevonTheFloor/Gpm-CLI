@@ -7,7 +7,7 @@
         <input type="hidden" id="auteur" name="auteur" :value="email">
         <label>Titre : <input type="text" id="titre" name="titre" v-model="titre"> </label>
         <label>Message : <textarea id="message" name="message" v-model="message"></textarea> </label>
-        <input type="file" id="file" name="file">
+        <input type="file" id="file" @change="onFileSelected"/>
         <button @click="poster">POSTER</button>
       </form>
   
@@ -35,6 +35,7 @@ export default {
     } ,
     data(){
       return{
+        selectedFile: null,
         info: '',
         seen: false,
         seeAll: true,
@@ -46,6 +47,9 @@ export default {
     },
 
 		methods:{
+      onFileSelected(e){
+        this.selectedFile = e.target.files[0];
+      },
 			seeform(){
           this.seen = true;
           this.seeAll = false
@@ -54,14 +58,21 @@ export default {
           e.preventDefault();
           let token = localStorage.getItem('token');
           let email = localStorage.getItem('email');
-
-          this.axios.post("http://localhost:4040/api/forum/post",{
+          let fd = new FormData();
+          fd.append('file',this.selectedFile,this.selectedFile.name);
+          fd.append('titre',this.titre);
+          fd.append('auteur',email);
+          fd.append('message',this.message);
+          this.axios.post("http://localhost:4040/api/forum/post",fd
+          /*{
              titre: this.titre,
              auteur: email,
              message : this.message
-           },{
+           }*/,
+           {
              headers:{
-               "Authorization":"Bearer "+token
+               "Authorization":"Bearer "+token,
+               'Content-Type': 'multipart/form-data'
              }
            })
            .then(response =>{console.log(response)})

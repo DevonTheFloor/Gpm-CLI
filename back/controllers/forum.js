@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const connectdb = require('../queries/connectdb');
+const fs = require('fs');
 
 exports.postOne = (req,res,next)=>{
 
@@ -120,3 +121,41 @@ exports.getAllRes = (req,res,next)=>{
         res.status(200).json(result);
         });
 };
+
+exports.deleteOne = (req,res,next)=>{
+
+    console.log("Connect On DeleteOne");
+    let id_message = req.body.id;
+    let urlimg = req.body.urlimg;
+    console.log('id mesg :',id_message);
+    const filename = urlimg.split('/dl/')[1];
+    console.log('filename :',filename);
+    fs.unlink(`images/${filename}`,()=>{
+        var sql = "DELETE FROM forum where _id=?";
+        var insert = [id_message];
+        sql = mysql.format(sql,inserts);
+        connecrtdb.query(sql,function(err,result){
+        if (err) throw err ;
+        console.log("delete on");
+        res.redirect('http://localhost:8080/#/zi-forum');
+    });
+    
+    });
+}
+
+
+exports.deleteSauce = (req, res, next) => {
+    console.log("DELETE");
+    Sauce.findOne({ _id: req.params.id })
+      .then(sauce => {
+        console.log("j'ai find le One!");
+        const filename = sauce.imageUrl.split('/images/')[1];
+      
+        fs.unlink(`images/${filename}`, () => {
+          sauce.deleteOne({ _id: req.params.id })
+            .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+            .catch(error => res.status(400).json({message:"image non effacée"}));
+        });
+      })
+      .catch(error => res.status(500).json({message:"probleme de sauce"}));
+  };

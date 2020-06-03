@@ -19,10 +19,10 @@ export default {
     Connect
   },
   mounted(){
-    let iscox = localStorage.getItem('email');
+    /*let iscox = localStorage.getItem('email');
     if(iscox){
       window.location.assign('http://localhost:8080/#/vous-etes-ici');
-    }
+    }*/
     
   }
 }

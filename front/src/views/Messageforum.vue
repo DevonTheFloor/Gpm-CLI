@@ -5,13 +5,14 @@
     <section class=" col-lg-10" v-for="item in info" :key="item.id">
 
       <div class="listForum">
-        <Deletebtn v-if="del"/>
+        <Deletebtn :id="id" :idmessage="id_question"/>
         <h2>{{ item.titre }} </h2>
         <p>Par : {{ item.auteur }}</p>
         <p>le: {{ item.quand }}</p>
         <p class="msgForum"> {{ item.message }} </p>
         <p><img :src="item.urlimg" class="imgMsg"></p>
         <p> </p>
+
           
           <section class="reponseForum" v-for="res in resall" :key="res.id">
             <div class="listForum" >
@@ -57,16 +58,11 @@ export default {
         id_question: '',
         salon : "forum" ,
         token:'',
-        del:''
+        urlimg:''
       }
     },
        
     methods:{
-      deleting(){
-        if(this.auteur == this.email){
-          this.del=true
-        }
-      },
       responseForum(e){
          e.preventDefault();
         //récupération de l'id du message dans l'url
@@ -94,17 +90,38 @@ export default {
           },
           {
             headers:{
-              "Authorization":"Bearer "+token
+              "Authorization":"Bearer "+token,
+              'Accept': 'application/json',
+              'Content-Type': 'multipart/form-data'
             }
           })
           .then(response => {console.log(response)})
           .catch(error => {console.log(error)});
           location.reload();
+      },
+     deletemsg(){
+        let urlimg = this.info.urlimg;
+        console.log('urlimg :',urlimg);
+        let uri1 = document.location.href;
+        console.log('uri1 :',uri1);
+        let test = uri1.split('#')[1];
+        console.log('test :' ,test);
+
+        let url3 = new URL(test,'http://localhost');
+        let id = url3.searchParams.get('id');
+        console.log("idmesg :",id)
       }
-      
     },
     mounted(){
         let nameAuteur = localStorage.getItem('email');
+        //let proprio= resall.auteur;
+        //console.log("auteur :",proprio);
+        console.log("email :",nameAuteur)
+        if(this.auteur == nameAuteur){
+          this.del=true
+        }else{this.del = false}
+
+       
         this.auteur = nameAuteur;
         let token = localStorage.getItem('token');
         //récupération de l'id du message dans l'url
