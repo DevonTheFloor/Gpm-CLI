@@ -6,6 +6,7 @@ import Sommaire from '../views/Sommaire'
 import Messageforum from '../views/Messageforum'
 import Chat from '../views/Chat'
 import Market from '../views/Market'
+import Statistic from '../views/Statistic'
 import Test from '../views/Test'
 
 Vue.use(VueRouter)
@@ -46,6 +47,11 @@ Vue.use(VueRouter)
     path: '/market-place',
     name: 'Market',
     component: Market
+  },
+  {
+    path: '/stat',
+    name: 'Statistic',
+    component: Statistic
   },
   {
     path: '/test',

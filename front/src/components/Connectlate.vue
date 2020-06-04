@@ -1,28 +1,32 @@
 <template>
-<form @submit.prevent="submit">
+<!--<form @submit.prevent="submit">-->
+  <form>
   <div class="form-group" :class="{ 'form-group--error': $v.email.$error }">
     <label class="form__label">Email</label>
     <input class="form__input" v-model.trim="$v.email.$model"/>
   </div>
   <div class="error_1" v-if="!$v.email.required">Champs email obligatoire</div>
-  <div class="error" v-if="!$v.name.minLength">email doit avoir au moins {{$v.name.$params.minLength.min}} caractères.</div>
+  <div class="error" v-if="!$v.email.minLength">Email doit avoir au moins {{$v.email.$params.minLength.min}} caractères.</div>
 
-	<div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
-    <label class="form__label">Name</label>
-    <input class="form__input" v-model.trim="$v.name.$model"/>
+	<div class="form-group" :class="{ 'form-group--error': $v.mdp.$error }">
+    <label class="form__label">Mot de passe</label>
+    <input class="form__input" v-model.trim="$v.mdp.$model"/>
   </div>
-  <div class="error_1" v-if="!$v.name.required">Motde passe requis</div>
-  <div class="error" v-if="!$v.name.minLength">Doit avoir au moins {{$v.name.$params.minLength.min}} caractères.</div>
+  <div class="error_1" v-if="!$v.mdp.required">Mot de passe requis</div>
+  <div class="error" v-if="!$v.mdp.minLength">Doit avoir au moins {{$v.mdp.$params.minLength.min}} caractères.</div>
+  <input type="hidden" id="isadm" name="isadm" value="0">
 
-  <button class="button" type="submit" :disabled="submitStatus === 'PENDING'">S'enregistrer</button>
-  <p class="typo__p" v-if="submitStatus === 'OK'">Merci!</p>
-  <p class="typo__p" v-if="submitStatus === 'ERROR'">Merci de renseigner correctement les champs.</p>
-  <p class="typo__p" v-if="submitStatus === 'PENDING'">Création du compte...</p>
+  <!--<button class="button" type="submit" :disabled="submitStatus === 'PENDING'">S'enregistrer</button>-->
+  <button class="button" @submit.prevent="submit">S'enregistrer</button>
+  <p class="typo__p1" v-if="submitStatus === 'OK'">Merci!</p>
+  <p class="typo__p2" v-if="submitStatus === 'ERROR'">Merci de renseigner correctement l'email'.</p>
+  <p class="typo__p3" v-if="submitStatus === 'PENDING'">Création du compte...</p>
 
-	<button class="button" type="submit" :disabled="submitStatus === 'PENDING'">Connexion</button>
-  <p class="typo__p" v-if="submitStatus === 'OK'">Merci!</p>
-  <p class="typo__p" v-if="submitStatus === 'ERROR'">Merci de renseigner correctement les champs.</p>
-  <p class="typo__p" v-if="submitStatus === 'PENDING'">Connection ...</p>
+	<!--<button class="button" type="submit" :disabled="submitStatus === 'PENDING'">Connexion</button>-->
+  <button class="button" @coucou.prevent="submit">S'enregistrer</button>
+  <p class="typo__p1" v-if="submitStatus === 'OK'">Merci!</p>
+  <p class="typo__p2" v-if="submitStatus === 'ERROR'">Merci de renseigner correctement le mot de passe.</p>
+  <p class="typo__p3" v-if="submitStatus === 'PENDING'">Connection ...</p>
 </form>
 </template>
 
@@ -33,6 +37,7 @@ import { required, minLength } from 'vuelidate/lib/validators'
 export default {
   data() {
     return {
+      isadm:0,
       email: '',
       name: '',
       submitStatus: null
@@ -43,24 +48,27 @@ export default {
       required,
       minLength: minLength(4)
 		},
-		name: {
+		mdp: {
       required,
       minLength: minLength(4)
 		}
   },
   methods: {
     submit() {
-      console.log('submitation!')
+      console.log('on submitation!')
       this.$v.$touch()
       if (this.$v.$invalid) {
         this.submitStatus = 'ERROR'
       } else {
-        console.log('Sefice tes Dpuanes !!')
+        console.log('Serfice tes Dpuanes !!')
         this.submitStatus = 'PENDING'
         setTimeout(() => {
           this.submitStatus = 'OK'
         }, 500)
       }
+    },
+    coucou(){
+      console.log('COUCOU')
     }
   }
 }

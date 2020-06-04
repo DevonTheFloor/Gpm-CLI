@@ -2,6 +2,7 @@
   <div class="sommaire">
     <Head page="http://localhost:8080/"/>
     <p  @click="disconnection" class="disconnect"><router-link to="/">disconnect</router-link></p>
+    <p > IS ADMIN : {{ isadm }} </p>
 
      <section class="menuSom">
       <h2><router-link to="/zi-forum">FORUM</router-link></h2>
@@ -11,6 +12,10 @@
     </section >
       <section class="menuSom">
       <h2><router-link to="/chat-live">Chat</router-link></h2>
+    </section>
+    <section  v-if="isadm == 'true'" class="menuSom">
+      <h2><router-link to="/stat">Statistique</router-link></h2>
+      <p class="mesadm">Accés admin uniquement</p>
     </section>
 
   </div>
@@ -25,12 +30,28 @@ export default {
   components:{
     Head
   },
-methods:{
-  disconnection(){
-    localStorage.clear();
-  }
+  data(){
+    return{
+      isadm: '',
+    }
+  },
+    computed: {
+
+    },
+  methods:{
+    disconnection(){
+      localStorage.clear();
+      }
+    },
+    mounted(){
+      console.log('isadmi :',this.isadm)
+      let droit = localStorage.getItem('isadm');
+      console.log("droit :",droit);
+      this.isadm = droit;
+      console.log('newisAdmin :',this.isadm);
+    }
 }
-}
+
 </script>
 
 <style lang="scss">
@@ -69,5 +90,8 @@ h1{
     background-color: ivory;
     color: black;
   }
+}
+.mesadm{
+  color: blue;
 }
 </style>

@@ -114,12 +114,6 @@ export default {
     },
     mounted(){
         let nameAuteur = localStorage.getItem('email');
-        //let proprio= resall.auteur;
-        //console.log("auteur :",proprio);
-        console.log("email :",nameAuteur)
-        if(this.auteur == nameAuteur){
-          this.del=true
-        }else{this.del = false}
 
        
         this.auteur = nameAuteur;

@@ -4,20 +4,22 @@
       <form id="appform" >
         <label> email: <input id="email" v-model="email" type="text" name="email"></label>
         <label> mot de passe : <input id="name" v-model="mdp" type="text" name="mdp"></label>
+        <input type="hidden" id="isadm" name="isadm" :value="isadm">
         <br/>
+          <button id="btn-signup" type="submit" @click="createUser">Créer un compte</button>
           <button id="btn-cnt" @click="loginuser" > Se Connecter </button>
-            <button id="btn-signup" type="submit" @click="createUser">Créer un compte</button>
       </form>
     </section>
 </template>
 
 <script>
 export default {
-    name: 'Login',
+    name: 'Connect',
     data(){
         return{
-            email: '',
-            mdp: ''
+          isadm:false,
+          email: '',
+          mdp: ''
         }
     },
     methods:{
@@ -26,26 +28,19 @@ export default {
       console.log("form submit");
       let loginfo ={
           email: this.email,
-          mdp: this.mdp
+          mdp: this.mdp,
+
         }
       this.axios.post('http://localhost:4040/api/auth/login',loginfo
         )
           .then(function(response) {
             console.log(response.data),
             localStorage.setItem("email",response.data.email),
-            localStorage.setItem("token",response.data.token)
+            localStorage.setItem("token",response.data.token),
+            localStorage.setItem("isadm",response.data.isadm)
 
             })
-            /*.then(()=>{
-              let token = localStorage.getItem('token');
-              this.axios.get('http://localhost:4040/api/',
-              { headers: 
-                {'Aunthorisation': 'Bearer '+token}},
-              )*/
             .then( window.location.assign('http://localhost:8080/#/vous-etes-ici'))
-              //.then(()=>{console.log("OKAAAAAAAAAy!!")})
-              /*.catch(()=>{console.log("erreur redirection")});
-              })*/
           .catch(function (error) {
             console.log(error);
             });
@@ -56,7 +51,8 @@ export default {
        
       let adduser = {
         email: this.email,
-        mdp: this.mdp
+        mdp: this.mdp,
+        isadm:this.isadm
         };
       let newUser = JSON.stringify(adduser);
       console.log("adduser = ", adduser);
@@ -82,5 +78,10 @@ export default {
 section {
 	margin: 1%
 	}
+  #confMessage{
+    color: blue;
+    border:blue;
+    background-color: rgb(135, 192, 240);
+  }
 
 </style>

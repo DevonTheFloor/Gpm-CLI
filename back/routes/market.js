@@ -6,5 +6,6 @@ const marketCtrl = require('../controllers/market');
 
 router.post('/post',multer, marketCtrl.postOne);
 router.get('/all',auth, marketCtrl.getAll);
+router.get('/marketStat',auth,marketCtrl.statMarket);
 
 module.exports = router;

@@ -9,6 +9,7 @@ router.post('/reponse',auth, multer, forumCtrl.resForum);
 router.post('/reponse/all',auth, forumCtrl.getAllRes);
 router.get('/post/:id',auth, forumCtrl.getOne);
 router.get('/posts',auth,forumCtrl.getAll);
+router.get('/forumStat',auth,forumCtrl.forumStat)
 router.delete('deleteone/:id', auth,multer, forumCtrl.deleteOne);
 
 module.exports = router;

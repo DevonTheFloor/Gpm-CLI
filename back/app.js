@@ -6,8 +6,7 @@ const forumRouter = require('./routes/forum');
 const marketRouter = require('./routes/market');
 const rezoRouter = require('./routes/rezo');
 const testRouter = require('./routes/test');
-const auth = require('./middleware/auth');
-
+const adminRouter = require('./routes/admin');
 
 
 const app = express();
@@ -26,13 +25,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use("/api/images/dl",express.static(path.join(__dirname, 'images')));
 app.use('/api/auth',usersRouter);
-//app.use("/api/", express.static(path.join(__dirname, 'front')));
 app.use('/api/test',testRouter);
 app.use("/api/forum",forumRouter);
 app.use('/api/market', marketRouter);
 app.use('/api/rezo',rezoRouter);
-
-
+app.use('/api/admin',adminRouter);
 
 
 module.exports = app;

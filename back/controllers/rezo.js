@@ -27,3 +27,13 @@ exports.postOne = (req,res,next)=>{
           res.redirect("http://localhost:8080/#/chat-live");
       });
   }
+
+  exports.statChat = (req,res,next)=> {
+    console.log("Connecté mySQL on getAll !!");
+    var qy1 = "SELECT * FROM rezo ORDER BY quand DESC LIMIT 5 ";
+    connectdb.query(qy1, function(err,result){
+      if (err) throw err ;
+      console.log(result);
+      res.status(200).json(result);
+      });
+  };
