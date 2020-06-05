@@ -20,11 +20,12 @@
               <p>Par : {{ res.auteur }} </p>
               <p>le: {{ res.quand }} </p>
               <p class="msgForum"> {{ res.message }} </p>
+              <p><img :src="res.urlimg" class="imgMsg"></p>
               <p> </p>
             </div>
           </section>
           <section>
-            <form class="repForum" enctype="multipart/form-data">
+            <form class="repForum" enctype="multipart/form-data" id="formRepForum">
               <input type="hidden" id="salon" name="salon" v-model="salon">
               <input type="hidden" id="id_question" name="id_question" :value="id_question">
               <input type="hidden" id="auteur" name="auteur" v-model="auteur">
@@ -57,10 +58,10 @@ export default {
         message : '',
         id: '',
         id_question: '',
-        salon : "forum" ,
         token:'',
         urlimg:'',
-        isadm:''
+        isadm:'',
+        salon:'forum'
       }
     },
        
@@ -81,30 +82,26 @@ export default {
           let token = localStorage.getItem('token');
           console.log(token);
           let name = localStorage.getItem('email');
-          this.auteur = name;
+          console.log('name: ',name);
+          let postreponse = document.getElementById('formRepForum');
+          const fd = new FormData(postreponse);
+         this.axios.post("http://localhost:4040/api/forum/reponse",fd,{
 
-          this.axios.post("http://localhost:4040/api/forum/reponse",{
-
-            id_question : this.id_question,
-            auteur : this.auteur,
-            message : this.message,
-            salon : this.salon
-          },
-          {
             headers:{
               "Authorization":"Bearer "+token,
               'Accept': 'application/json',
               'Content-Type': 'multipart/form-data'
             }
           })
-          .then(response => {console.log(response)})
+          .then(() => {})
           .catch(error => {console.log(error)});
-          location.reload();
-      },
-     deletemsg(){
+        },
+      deletemsg(){
         let idm = this.id_question;
         console.log(idm);
         let token = localStorage.getItem('token');
+        token;
+        console.log('CLICKING !!')
         this.axios.delete('http://localhost:4040/api/forum/deleteone/'+idm,{
            headers:{
              "Authorizartion":"Bearer "+token

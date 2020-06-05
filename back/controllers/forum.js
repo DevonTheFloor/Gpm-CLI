@@ -70,7 +70,9 @@ exports.resForum = (req,res,next)=>{
 
     console.log("Connecté REPONSE forum!!");
     if(req.file){
+
         console.log('connection avec IMG');
+        console.log(req.body);
         let auteur= req.body.auteur;
         let message = req.body.message;
         let urlimg = "http://localhost:4040/api/images/dl/"+req.file.filename;
@@ -78,7 +80,7 @@ exports.resForum = (req,res,next)=>{
         let salon = req.body.salon;
     
         //var sql = "INSERT INTO reponse VALUES(NULL,?,?,?,?,?,NOW())";
-        var sql = "INSERT INTO reponse (auteur,message,urlimg,id_question,salon,quand) VALUES(?,?,?,?,?,NOW()))";
+        var sql = "INSERT INTO reponse (auteur,message,urlimg,id_question,salon,quand) VALUES(?,?,?,?,?,NOW())";
         var inserts = [auteur,message,urlimg,id_question,salon];
         sql = mysql.format(sql,inserts);
         connectdb.query(sql, function(err,result){
@@ -146,10 +148,11 @@ exports.deleteOne = (req,res,next)=>{
     	console.log('id mesg :',id_message);
     
     });
+    res.status(200).json({message:"Recu 5 sur 5 Billy!"})
 }
 
 
-exports.deleteSauce = (req, res, next) => {
+/*exports.deleteSauce = (req, res, next) => {
     console.log("DELETE");
     Sauce.findOne({ _id: req.params.id })
       .then(sauce => {
@@ -163,4 +166,4 @@ exports.deleteSauce = (req, res, next) => {
         });
       })
       .catch(error => res.status(500).json({message:"probleme de sauce"}));
-  };
+  };*/

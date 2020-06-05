@@ -3,7 +3,7 @@
   <!--<div id="messagesForum" class="forum  justify-content-lg-center " >-->
     <div class="forum" >
       <Head page="/#/vous-etes-ici"/>
-      <form v-if="seen" enctype="multipart/form-data">
+      <form v-show="seen" enctype="multipart/form-data" id="formpost">
         <input type="hidden" id="auteur" name="auteur" :value="email">
         <label>Titre : <input type="text" id="titre" name="titre" v-model="titre"> </label>
         <label>Message : <textarea id="message" name="message" v-model="message"></textarea> </label>
@@ -35,7 +35,6 @@ export default {
     } ,
     data(){
       return{
-        selectedFile: null,
         info: '',
         seen: false,
         seeAll: true,
@@ -58,17 +57,10 @@ export default {
           e.preventDefault();
           let token = localStorage.getItem('token');
           let email = localStorage.getItem('email');
-          let fd = new FormData();
-          fd.append('file',this.selectedFile,this.selectedFile.name);
-          fd.append('titre',this.titre);
-          fd.append('auteur',email);
-          fd.append('message',this.message);
-          this.axios.post("http://localhost:4040/api/forum/post",fd
-          /*{
-             titre: this.titre,
-             auteur: email,
-             message : this.message
-           }*/,
+          this.auteur = email;
+          let formpost = document.getElementById('formpost')
+          let fd = new FormData(formpost);
+          this.axios.post("http://localhost:4040/api/forum/post",fd,
            {
              headers:{
                "Authorization":"Bearer "+token,
