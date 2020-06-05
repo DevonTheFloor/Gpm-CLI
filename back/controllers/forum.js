@@ -135,20 +135,15 @@ exports.forumStat = (req,res,next)=>{
 exports.deleteOne = (req,res,next)=>{
 
     console.log("Connect On DeleteOne");
-    let id_message = req.body.id;
-    let urlimg = req.body.urlimg;
-    console.log('id mesg :',id_message);
-    const filename = urlimg.split('/dl/')[1];
-    console.log('filename :',filename);
-    fs.unlink(`images/${filename}`,()=>{
-        var sql = "DELETE FROM forum where _id=?";
-        var insert = [id_message];
-        sql = mysql.format(sql,inserts);
-        connecrtdb.query(sql,function(err,result){
-        if (err) throw err ;
-        console.log("delete on");
-        res.redirect('http://localhost:8080/#/zi-forum');
-    });
+    let id_message = req.params.id;
+    var sql = "DELETE FROM forum where _id=?";
+     var insert = [id_message];
+    sql = mysql.format(sql,inserts);
+    connecrtdb.query(sql,function(err,result){
+    	if (err) throw err ;
+   		console.log("delete on");
+    	res.status(200).json({message:"post deleted"})
+    	console.log('id mesg :',id_message);
     
     });
 }

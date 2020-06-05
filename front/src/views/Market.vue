@@ -4,8 +4,10 @@
 	<Head page='/#/vous-etes-ici'/>
 	<section  class=" col-lg-6 of formForum"  v-for="article in annonce" :key="article.id">
     <div class="listForum">
-	<Deletebtn/>
-      <a  href="/api/market/post/:id"><h4> {{article.titre}} </h4></a>
+	<Deletebtn v-if="article.auteur == auteur"/>
+	<button class="dbtna" v-if="isadm == 'true'" @click="deletemsg">x</button>
+  <a  href="/api/market/post/:id"><h4> {{article.titre}} </h4></a>
+		<p>par: {{ article.auteur }}</p>
       <p> {{ article.annonce}} </p>
       <img class="picmarket" :src="article.urlimg">
     </div>
@@ -26,10 +28,13 @@ export default {
 		return{
 			visible: true,
 			annonce: '',
+			auteur:''
 
 		}
 	},
 	mounted(){
+		let nameauteur = localStorage.getItem('email');
+		this.auteur = nameauteur;
 		let token = localStorage.getItem('token');
 		this.axios.get("http://localhost:4040/api/market/all",{
 			headers:{

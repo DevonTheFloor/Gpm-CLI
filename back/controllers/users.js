@@ -32,7 +32,7 @@ const connectdb = require('../queries/connectdb');
     console.log("Connected DBs for login");
     let email = req.body.email;
     //let mdp =req.body.mdp;
-    var sql = "SELECT email,mdp,isadm FROM users WHERE email=?";
+    var sql = "SELECT _id,email,mdp,isadm FROM users WHERE email=?";
     var inserts = [email];
     sql = mysql.format(sql,inserts);
     connectdb.query(sql,function(err,result){
@@ -49,7 +49,7 @@ const connectdb = require('../queries/connectdb');
           if (!valid) {
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
         }else {
-          res.status(200).json({email: req.body.email,isadm:elemt.isadm,
+          res.status(200).json({email: req.body.email,isadm:elemt.isadm,id:elemt._id,
             token: jwt.sign({ email: elemt.email },'RANDOM_TOKEN_SECRET',{ expiresIn: '24h' })
           })
         }
@@ -58,3 +58,17 @@ const connectdb = require('../queries/connectdb');
     });
   })
 }
+
+exports.deluser = (req,res,next)=>{
+
+  let id = req.params.id;
+  console.log('id :',id);
+  var sql = "DELETE FROM users WHERE _id=?";
+  var inserts = [id];
+  sql = mysql.format(sql,inserts);
+  connectdb.query(sql, function(err,result){
+      if (err) throw err ;
+      console.log("COMPTE SUPPRIME");
+      res.status(200).json({message:"Utilisateur supprimé"});
+  });
+};

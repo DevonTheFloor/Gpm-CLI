@@ -2,6 +2,7 @@
   <div class="sommaire">
     <Head page="http://localhost:8080/"/>
     <p  @click="disconnection" class="disconnect"><router-link to="/">disconnect</router-link></p>
+
     <p > IS ADMIN : {{ isadm }} </p>
 
      <section class="menuSom">
@@ -17,6 +18,7 @@
       <h2><router-link to="/stat">Statistique</router-link></h2>
       <p class="mesadm">Accés admin uniquement</p>
     </section>
+    <Deletuser/>
 
   </div>
 </template>
@@ -24,11 +26,13 @@
 <script>
 
 import Head from '../components/Head'
+import Deletuser from '../components/Deletuser'
 export default {
 
   name: 'Sommaire',
   components:{
-    Head
+    Head,
+    Deletuser
   },
   data(){
     return{

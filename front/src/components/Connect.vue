@@ -37,7 +37,9 @@ export default {
             console.log(response.data),
             localStorage.setItem("email",response.data.email),
             localStorage.setItem("token",response.data.token),
-            localStorage.setItem("isadm",response.data.isadm)
+            localStorage.setItem("isadm",response.data.isadm),
+            localStorage.setItem("idu",response.data.id)
+  
 
             })
             .then( window.location.assign('http://localhost:8080/#/vous-etes-ici'))

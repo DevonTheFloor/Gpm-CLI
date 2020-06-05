@@ -1,5 +1,5 @@
 <template>
-	<button class="dbtn" @click="deletemsg">x</button>
+	<button class="dbtn">x</button>
 </template>
 
 <script>
@@ -12,18 +12,10 @@ export default {
 		}
 	},
 	methods:{
-		deletemsg(){
-        let urlimg = this.info.urlimg;
-        console.log('urlimg :',urlimg);
-        let uri1 = document.location.href;
-        console.log('uri1 :',uri1);
-        let test = uri1.split('#')[1];
-        console.log('test :' ,test);
-
-        let url3 = new URL(test,'http://localhost');
-        let id = url3.searchParams.get('id');
-        console.log("idmesg :",id)
-      }
+			delmsgforum(){
+			console.log(this.formsg._id)
+		}
+		
 	}
 }
 </script>

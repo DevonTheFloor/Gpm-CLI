@@ -5,7 +5,8 @@
     <section class=" col-lg-10" v-for="item in info" :key="item.id">
 
       <div class="listForum">
-        <Deletebtn :id="id" :idmessage="id_question"/>
+        <Deletebtn :id="id" :idmessage="id_question" v-if="item.auteur == auteur"/>
+        <button class="dbtna" v-if="isadm == 'true'" @click="deletemsg">x</button>
         <h2>{{ item.titre }} </h2>
         <p>Par : {{ item.auteur }}</p>
         <p>le: {{ item.quand }}</p>
@@ -58,7 +59,8 @@ export default {
         id_question: '',
         salon : "forum" ,
         token:'',
-        urlimg:''
+        urlimg:'',
+        isadm:''
       }
     },
        
@@ -100,22 +102,23 @@ export default {
           location.reload();
       },
      deletemsg(){
-        let urlimg = this.info.urlimg;
-        console.log('urlimg :',urlimg);
-        let uri1 = document.location.href;
-        console.log('uri1 :',uri1);
-        let test = uri1.split('#')[1];
-        console.log('test :' ,test);
+        let idm = this.id_question;
+        console.log(idm);
+        let token = localStorage.getItem('token');
+        this.axios.delete('http://localhost:4040/api/forum/deleteone/'+idm,{
+           headers:{
+             "Authorizartion":"Bearer "+token
+           }
+         })
+         .then(()=>{window.location.assign})
+         .catch(error => {console.log(error)});
 
-        let url3 = new URL(test,'http://localhost');
-        let id = url3.searchParams.get('id');
-        console.log("idmesg :",id)
       }
     },
     mounted(){
+        let isadm = localStorage.getItem('isadm');
+        this.isadm = isadm;
         let nameAuteur = localStorage.getItem('email');
-
-       
         this.auteur = nameAuteur;
         let token = localStorage.getItem('token');
         //récupération de l'id du message dans l'url
@@ -173,6 +176,11 @@ export default {
 .imgMsg{
   max-width: 50%;
   background-origin: 2px solid white;
+}
+.dbtna{
+	color: red;
+	background-color: rgb(240, 197, 118);
+	border: 1px solid red;
 }
 
 </style>
