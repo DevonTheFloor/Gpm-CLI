@@ -28,8 +28,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QiL
 
 ###
 
-DELETE http://localhost:4040/api/forum/deleteone/28
+DELETE http://localhost:4040/api/forum/deleteone/33
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMSIsImlhdCI6MTU5MTM1MzE3OCwiZXhwIjoxNTkxNDM5NTc4fQ.tYYO0OTDt8Ttp_qSY6iSJvaYUkU3QNRuW5uar4o9LZE
+
+###
+
+GET http://localhost:4040/api/test/get
 
 ###

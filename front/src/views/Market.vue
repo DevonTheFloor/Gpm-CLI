@@ -1,18 +1,47 @@
 <template>
+<div class="market">
+	<Head page="http://localhost:8080/#/vous-etes-ici"/>
+	<nav class="menuMarket">
+    <ol>
+      <li>Auto</li>
+      <li>Maison</li>
+      <li>Informatique</li>
+      <li>Autre</li>
+    </ol>
+  </nav>
 
-<div v-if="visible" class="market">
-	<Head page='/#/vous-etes-ici'/>
-	<section  class=" col-lg-6 of formForum"  v-for="article in annonce" :key="article.id">
+  <button id="addAnnonce" @click="seeForm">Poster une annonce</button>
+	<div v-show="visible" class="market">
+		<section  class="clo-lg-8 "  v-for="article in annonce" :key="article.id">
     <div class="listForum">
-	<Deletebtn v-if="article.auteur == auteur"/>
-	<button class="dbtna" v-if="isadm == 'true'" @click="deletemsg">x</button>
-  <a  href="/api/market/post/:id"><h4> {{article.titre}} </h4></a>
-		<p>par: {{ article.auteur }}</p>
+			<Deletebtn v-if="article.auteur == auteur"/>
+			<button class="dbtna" v-if="isadm == 'true'" @click="deletemsg">x</button>
+			<a  href="/api/market/post/:id"><h4> {{article.titre}} </h4></a>
+			<p>par: {{ article.auteur }}</p>
       <p> {{ article.annonce}} </p>
-      <img class="picmarket" :src="article.urlimg">
+			<img class="picmarket" :src="article.urlimg">
     </div>
-  </section>
+    </section>
 	</div>
+
+	<!--<section class="justify-content-lg-center">
+    <form enctype="multipart/form-data" v-show="seen">
+        <input type="hidden" id="auteur" name="auteur" :value="email">
+        <label> Titre : <input type="text" id="titre" name="titre" v-model="titre"></label>
+        <label> Catégorie : 
+        <select id="categorie" name="categorie" v-model="categorie">
+          <option value="auto ">Auto</option>
+          <option value="maison" >Maison</option>
+          <option value="infor" >Informatique</option>
+          <option value="autre" >Autre</option>
+        </select> 
+        </label> 
+        <label>Annonce: <textarea id="annonce" name="annonce" v-model="annonce"></textarea></label>
+        <label> Photo: <input type="file" id="file" name="file"></label>
+        <button @click="annoncer"> Annoncer !</button>
+      </form>
+  </section>-->
+</div>
 </template>
 
 <script>
@@ -27,12 +56,26 @@ export default {
 	data(){
 		return{
 			visible: true,
+			seen: false,
 			annonce: '',
-			auteur:''
-
+			categorie:'',
+			auteur:'',
+			email:'',
+			titre:'',
+			isadm:''
 		}
 	},
+	methods:{
+		seeForm(){
+			this.visible = false;
+			this.seen = true;
+		},
+		annoncer(){},
+		deletemsg(){}
+	},
 	mounted(){
+		let isadm = localStorage.getItem('isadm');
+		this.isadm= isadm;
 		let nameauteur = localStorage.getItem('email');
 		this.auteur = nameauteur;
 		let token = localStorage.getItem('token');
@@ -66,5 +109,21 @@ export default {
   width: 90%;
   padding: 1%;
   margin: 1%;
+}
+.menuMarket{
+  border: 2px solid grey;
+  background-color: beige;
+  color:red;
+}
+ol{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	list-style: none;
+}
+.dbtna{
+	color: red;
+	background-color: rgb(240, 197, 118);
+	border: 1px solid red;
 }
 </style>

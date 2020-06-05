@@ -5,8 +5,7 @@
     <section class=" col-lg-10" v-for="item in info" :key="item.id">
 
       <div class="listForum">
-        <Deletebtn :id="id" :idmessage="id_question" v-if="item.auteur == auteur"/>
-        <button class="dbtna" v-if="isadm == 'true'" @click="deletemsg">x</button>
+        <button v-show="item.auteur == auteur || isadm == 'true'" @click="deletemsg" class="dbtna">x</button>
         <h2>{{ item.titre }} </h2>
         <p>Par : {{ item.auteur }}</p>
         <p>le: {{ item.quand }}</p>
@@ -42,13 +41,13 @@
 
 <script>
 import Head from '../components/Head'
-import Deletebtn from '../components/Deletebtn'
+
 export default {
   
   name: 'Messageforum',
   components:{
     Head,
-    Deletebtn
+
     },
 		data(){
 			return{
@@ -86,7 +85,6 @@ export default {
           let postreponse = document.getElementById('formRepForum');
           const fd = new FormData(postreponse);
          this.axios.post("http://localhost:4040/api/forum/reponse",fd,{
-
             headers:{
               "Authorization":"Bearer "+token,
               'Accept': 'application/json',
@@ -96,7 +94,9 @@ export default {
           .then(() => {})
           .catch(error => {console.log(error)});
         },
-      deletemsg(){
+        deletemsg(){
+        console.log('COUCOU');
+        window.confirm('Etes vous sûr de vouloir effacer ce mesage?');
         let idm = this.id_question;
         console.log(idm);
         let token = localStorage.getItem('token');
@@ -104,13 +104,12 @@ export default {
         console.log('CLICKING !!')
         this.axios.delete('http://localhost:4040/api/forum/deleteone/'+idm,{
            headers:{
-             "Authorizartion":"Bearer "+token
+             "Authorization":"Bearer "+token
            }
          })
-         .then(()=>{window.location.assign})
+         .then(()=>{window.location.assign('http://localhost:8080/#/zi-forum')})
          .catch(error => {console.log(error)});
-
-      }
+        }
     },
     mounted(){
         let isadm = localStorage.getItem('isadm');

@@ -55,7 +55,6 @@ exports.getOne = (req,res,next)=>{
  
     console.log("Connecté mySQL on GetOne !!");
     var sql = "SELECT * FROM forum WHERE _id=?";
-
     var inserts = [_id];
     sql = mysql.format(sql,inserts);
     connectdb.query(sql, function(err,result){
@@ -138,32 +137,24 @@ exports.deleteOne = (req,res,next)=>{
 
     console.log("Connect On DeleteOne");
     let id_message = req.params.id;
-    var sql = "DELETE FROM forum where _id=?";
-     var insert = [id_message];
+    var sql = "DELETE FROM forum WHERE _id=?";
+     var inserts = [id_message];
     sql = mysql.format(sql,inserts);
-    connecrtdb.query(sql,function(err,result){
+    connectdb.query(sql,function(err,result){
     	if (err) throw err ;
    		console.log("delete on");
-    	res.status(200).json({message:"post deleted"})
-    	console.log('id mesg :',id_message);
-    
+    	res.status(200).json({message:"post deleted"});
+
     });
-    res.status(200).json({message:"Recu 5 sur 5 Billy!"})
 }
 
 
-/*exports.deleteSauce = (req, res, next) => {
-    console.log("DELETE");
-    Sauce.findOne({ _id: req.params.id })
-      .then(sauce => {
-        console.log("j'ai find le One!");
+/*
         const filename = sauce.imageUrl.split('/images/')[1];
       
         fs.unlink(`images/${filename}`, () => {
           sauce.deleteOne({ _id: req.params.id })
             .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
             .catch(error => res.status(400).json({message:"image non effacée"}));
-        });
-      })
-      .catch(error => res.status(500).json({message:"probleme de sauce"}));
+
   };*/

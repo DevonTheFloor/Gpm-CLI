@@ -1,5 +1,5 @@
 <template>
-	<button class="dbtn">x</button>
+	<button class="dbtn" @click="deletemsg">x</button>
 </template>
 
 <script>
@@ -12,12 +12,24 @@ export default {
 		}
 	},
 	methods:{
-			delmsgforum(){
-			console.log(this.formsg._id)
+		deletemsg(){
+			console.log('COUCOU');
+			let idm = this.id_question;
+      console.log(idm);
+      let token = localStorage.getItem('token');
+      token;
+      console.log('CLICKING !!')
+      this.axios.delete('http://localhost:4040/api/forum/deleteone/'+idm,{
+        headers:{
+          "Authorizartion":"Bearer "+token
+          }
+         })
+         .then(()=>{window.location.assign('http://localhost:8080/#/zi-forum')})
+         .catch(error => {console.log(error)});
+				}
 		}
 		
 	}
-}
 </script>
 
 <style lang="scss">
