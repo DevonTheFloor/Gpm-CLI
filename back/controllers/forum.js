@@ -147,14 +147,15 @@ exports.deleteOne = (req,res,next)=>{
 
     });
 }
-
-
 /*
         const filename = sauce.imageUrl.split('/images/')[1];
-      
         fs.unlink(`images/${filename}`, () => {
           sauce.deleteOne({ _id: req.params.id })
             .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
             .catch(error => res.status(400).json({message:"image non effacée"}));
 
   };*/
+
+exports.modifyOne = (req,res,next)=>{
+    console.log('MODIF ROUTE')
+};

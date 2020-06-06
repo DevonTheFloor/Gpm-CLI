@@ -39,8 +39,6 @@ export default {
             localStorage.setItem("token",response.data.token),
             localStorage.setItem("isadm",response.data.isadm),
             localStorage.setItem("idu",response.data.id)
-  
-
             })
             .then( window.location.assign('http://localhost:8080/#/vous-etes-ici'))
           .catch(function (error) {

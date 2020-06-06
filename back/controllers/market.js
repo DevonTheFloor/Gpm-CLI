@@ -16,8 +16,9 @@ exports.getAll = (req,res,next)=>{
   }
 
 exports.postOne = (req,res,next)=>{
-  
-    let urlimg = "/api/images/dl/"+req.file.filename;
+   
+  if(req.file){
+    let urlimg = "http://localhost:4040/api/images/dl/"+req.file.filename;
     let categorie = req.body.categorie;
     let annonce = req.body.annonce;
     let titre = req.body.titre;
@@ -30,8 +31,23 @@ exports.postOne = (req,res,next)=>{
       connectdb.query(sql, function(err,result){
           if (err) throw err ;
           console.log("Article mit en vente");
-          res.redirect("/api/market.html");
+          res.redirect("http://localhost:8080/#/market-place");
       });
+    }else{
+      let categorie = req.body.categorie;
+      let annonce = req.body.annonce;
+     let titre = req.body.titre;
+      console.log("req.body = ",req.body);
+      console.log("Connecté mySQL on Xampp !!");
+      var inserts = [titre,categorie,annonce];
+      var sql = "INSERT INTO market (titre,categorie,annonce,quand) VALUES(?,?,?,NOW())";
+      sql = mysql.format(sql,inserts);
+      connectdb.query(sql, function(err,result){
+          if (err) throw err ;
+          console.log("Article mit en vente");
+          res.redirect("http://localhost:8080/#/market-place");
+      });
+    }
   }
 
   exports.statMarket = (req,res,next)=>{

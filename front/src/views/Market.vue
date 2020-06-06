@@ -24,23 +24,23 @@
     </section>
 	</div>
 
-	<!--<section class="justify-content-lg-center">
-    <form enctype="multipart/form-data" v-show="seen">
-        <input type="hidden" id="auteur" name="auteur" :value="email">
-        <label> Titre : <input type="text" id="titre" name="titre" v-model="titre"></label>
-        <label> Catégorie : 
+	<section class="justify-content-lg-center">
+		<form enctype="multipart/form-data"  id="postannonce" v-show="seen">
+			<input type="hidden" id="auteur" name="auteur" :value="email">
+			<label> Titre : <input type="text" id="titre" name="titre" v-model="titre"/></label>
+			<label> Annonce :<textarea id="annonce" name="annonce" ></textarea></label>
+			<label> Catégorie : 
         <select id="categorie" name="categorie" v-model="categorie">
           <option value="auto ">Auto</option>
-          <option value="maison" >Maison</option>
-          <option value="infor" >Informatique</option>
-          <option value="autre" >Autre</option>
+          <option value="maison">Maison</option>
+          <option value="infor">Informatique</option>
+          <option value="autre">Autre</option>
         </select> 
-        </label> 
-        <label>Annonce: <textarea id="annonce" name="annonce" v-model="annonce"></textarea></label>
-        <label> Photo: <input type="file" id="file" name="file"></label>
-        <button @click="annoncer"> Annoncer !</button>
-      </form>
-  </section>-->
+      </label>
+			<label> Photo: <input type="file" id="file" name="file"/></label>
+			<button @click="annoncer"> Annoncer !</button>
+		</form>
+	</section>
 </div>
 </template>
 
@@ -62,7 +62,8 @@ export default {
 			auteur:'',
 			email:'',
 			titre:'',
-			isadm:''
+			isadm:'',
+			token:''
 		}
 	},
 	methods:{
@@ -70,7 +71,20 @@ export default {
 			this.visible = false;
 			this.seen = true;
 		},
-		annoncer(){},
+		annoncer(){
+			let annoncer = document.getElementById('postannonce');
+			let fd = new FormData(annoncer);
+			this.axios.post("http://localhost:4040/api/market/post",fd,{
+			headers:{
+				"Authorization":"Bearer "+this.token
+				}
+			})
+			.then(response => {
+			this.annonce = response.data,
+			console.log(response.data)
+			})
+			.catch(error =>{console.log(error)});
+		},
 		deletemsg(){}
 	},
 	mounted(){
@@ -79,6 +93,7 @@ export default {
 		let nameauteur = localStorage.getItem('email');
 		this.auteur = nameauteur;
 		let token = localStorage.getItem('token');
+		this.token = token;
 		this.axios.get("http://localhost:4040/api/market/all",{
 			headers:{
 				"Authorization":"Bearer "+token

@@ -6,13 +6,21 @@
 
       <div class="listForum">
         <button v-show="item.auteur == auteur || isadm == 'true'" @click="deletemsg" class="dbtna">x</button>
+        <button v-show="item.auteur == auteur" @click="seemodifier" class="dbtnm">modifier</button>
         <h2>{{ item.titre }} </h2>
         <p>Par : {{ item.auteur }}</p>
         <p>le: {{ item.quand }}</p>
         <p class="msgForum"> {{ item.message }} </p>
         <p><img :src="item.urlimg" class="imgMsg"></p>
         <p> </p>
-
+         <form class="modifForum" enctype="multipart/form-data" id="formModifieur" v-show="seemodif">
+            <input type="hidden" id="salon" name="salon" v-model="salon">
+            <input type="hidden" id="id_question" name="id_question" :value="id_question">
+            <input type="hidden" id="auteur" name="auteur" v-model="auteur">
+            <label> message : <textarea cols="30" id="message" name="message" v-model="message"> </textarea></label>
+            <label> Fichier : <input type="file" id="file" name="file"> </label>
+            <button @click="modifierForum"> Modifier</button>
+          </form>
           
           <section class="reponseForum" v-for="res in resall" :key="res.id">
             <div class="listForum" >
@@ -51,33 +59,47 @@ export default {
     },
 		data(){
 			return{
-				info : '',
-        resall: '',
-        auteur : '',
-        message : '',
+				info : '',              
         id: '',
         id_question: '',
         token:'',
         urlimg:'',
         isadm:'',
-        salon:'forum'
+        salon:'forum',
+        seemodif: false,
       }
     },
        
     methods:{
+      modifierForum(){
+        let formModifieur = document.getElementById('formModifieur');
+        let fdm = new FormData(formModifieur);
+        let idmo = this.id_question;
+        //let message= this.message
+        this.axios.put('http://localhost:4040/api/forum/modifier/'+idmo,fdm,{
+           headers:{
+             "Authorization":"Bearer "+this.token
+           }
+         })
+         .then(()=>{console.log('modifié')})
+         .catch(error => {console.log(error)});
+        },
+      seemodifier(){
+        this.seemodif = true;
+      },
       responseForum(e){
-         e.preventDefault();
-        //récupération de l'id du message dans l'url
-        let uri1 = document.location.href;
-        console.log(uri1);
-        let test = uri1.split('#')[1];
-        console.log('test :' ,test);
+          e.preventDefault();
+          //récupération de l'id du message dans l'url
+          let uri1 = document.location.href;
+          console.log(uri1);
+          let test = uri1.split('#')[1];
+          console.log('test :' ,test);
 
-        let url3 = new URL(test,'http://localhost');
-        let id = url3.searchParams.get('id');
-        console.log("avant post id :",id);
+          let url3 = new URL(test,'http://localhost');
+          let id = url3.searchParams.get('id');
+          console.log("avant post id :",id);
       
-        this.id_question = id;
+          this.id_question = id;
           let token = localStorage.getItem('token');
           console.log(token);
           let name = localStorage.getItem('email');
@@ -91,32 +113,33 @@ export default {
               'Content-Type': 'multipart/form-data'
             }
           })
-          .then(() => {})
+          .then(() => {console.log('ok')})
           .catch(error => {console.log(error)});
         },
-        deletemsg(){
-        console.log('COUCOU');
-        window.confirm('Etes vous sûr de vouloir effacer ce mesage?');
-        let idm = this.id_question;
-        console.log(idm);
-        let token = localStorage.getItem('token');
-        token;
-        console.log('CLICKING !!')
-        this.axios.delete('http://localhost:4040/api/forum/deleteone/'+idm,{
-           headers:{
+      deletemsg(){
+          console.log('COUCOU');
+          window.confirm('Etes vous sûr de vouloir effacer ce mesage?');
+          let idm = this.id_question;
+          console.log(idm);
+          let token = localStorage.getItem('token');
+          token;
+          console.log('CLICKING !!')
+          this.axios.delete('http://localhost:4040/api/forum/deleteone/'+idm,{
+            headers:{
              "Authorization":"Bearer "+token
            }
          })
          .then(()=>{window.location.assign('http://localhost:8080/#/zi-forum')})
          .catch(error => {console.log(error)});
-        }
+        },
     },
-    mounted(){
+      mounted(){
         let isadm = localStorage.getItem('isadm');
         this.isadm = isadm;
         let nameAuteur = localStorage.getItem('email');
         this.auteur = nameAuteur;
         let token = localStorage.getItem('token');
+        this.token = token;
         //récupération de l'id du message dans l'url
         let uri1 = document.location.href;
         console.log(uri1);
@@ -145,7 +168,6 @@ export default {
         
           //requête post(auth) voir toutes les reponses d'un post choisi
         this.axios.post("http://localhost:4040/api/forum/reponse/all",{
-          //id_question: this.id_question
           id_question : id
         },{
           headers:{
@@ -158,7 +180,9 @@ export default {
             console.log("resAll:" ,response.data)})
           .catch(error => {console.log(error)});
       } 
-}
+  }
+
+
 </script>
 
 <style lang="scss">
@@ -175,8 +199,15 @@ export default {
 }
 .dbtna{
 	color: red;
-	background-color: rgb(240, 197, 118);
-	border: 1px solid red;
+  border-radius: 5px;
 }
-
+.dbtnm{
+  border: blue;
+  color: blue;
+  background-color: rgb(153, 153, 248);
+  border-radius: 5px;
+}
+.modifForum{
+  background-color:whitesmoke;
+}
 </style>
