@@ -10,7 +10,7 @@ router.post('/reponse/all',auth, forumCtrl.getAllRes);
 router.get('/post/:id',auth, forumCtrl.getOne);
 router.get('/posts',auth,forumCtrl.getAll);
 router.get('/forumStat',auth,forumCtrl.forumStat);
-router.put('modifier',auth,multer,forumCtrl.modifyOne);
+router.put('/modifier',auth,multer,forumCtrl.modifyOne);
 router.delete('/deleteone/:id', auth,multer, forumCtrl.deleteOne);
 
 module.exports = router;

@@ -14,6 +14,7 @@
         <p><img :src="item.urlimg" class="imgMsg"></p>
         <p> </p>
          <form class="modifForum" enctype="multipart/form-data" id="formModifieur" v-show="seemodif">
+            <input type="hidden" id="titre" name="titre" v-model="item.titre">
             <input type="hidden" id="salon" name="salon" v-model="salon">
             <input type="hidden" id="id_question" name="id_question" :value="id_question">
             <input type="hidden" id="auteur" name="auteur" v-model="auteur">
@@ -32,7 +33,7 @@
             </div>
           </section>
           <section>
-            <form class="repForum" enctype="multipart/form-data" id="formRepForum">
+            <form class="repForum" enctype="multipart/form-data" id="formRepForum" v-if="master">
               <input type="hidden" id="salon" name="salon" v-model="salon">
               <input type="hidden" id="id_question" name="id_question" :value="id_question">
               <input type="hidden" id="auteur" name="auteur" v-model="auteur">
@@ -67,25 +68,28 @@ export default {
         isadm:'',
         salon:'forum',
         seemodif: false,
+        master: true,
+        message:''
       }
     },
        
     methods:{
-      modifierForum(){
+      modifierForum(e){
+        e.preventDefault();
         let formModifieur = document.getElementById('formModifieur');
         let fdm = new FormData(formModifieur);
-        let idmo = this.id_question;
-        //let message= this.message
-        this.axios.put('http://localhost:4040/api/forum/modifier/'+idmo,fdm,{
+        console.log(fdm);
+        this.axios.put('http://localhost:4040/api/forum/modifier',fdm,{
            headers:{
              "Authorization":"Bearer "+this.token
            }
          })
-         .then(()=>{console.log('modifié')})
+         .then(()=>{console.log('modifié'),location.reload()})
          .catch(error => {console.log(error)});
         },
       seemodifier(){
         this.seemodif = true;
+        this.master = false;
       },
       responseForum(e){
           e.preventDefault();

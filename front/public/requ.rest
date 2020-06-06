@@ -37,3 +37,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluM
 GET http://localhost:4040/api/test/get
 
 ###
+
+PUT http://localhost:4040/api/forum/modifier/34
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QiLCJpYXQiOjE1OTE0Mjc3NzUsImV4cCI6MTU5MTUxNDE3NX0.xylTUlpi5CugHwE5L0o8gIYnCs9Octyzl5ZHcqFxqIc
+
+{
+    "message":"test",
+    "urlimg":"http://"
+}
+
+###

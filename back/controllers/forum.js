@@ -157,5 +157,37 @@ exports.deleteOne = (req,res,next)=>{
   };*/
 
 exports.modifyOne = (req,res,next)=>{
-    console.log('MODIF ROUTE')
-};
+    console.log('MODIFY');
+    if(req.file){
+        let titre = req.body.titre;
+        let auteur= req.body.auteur;
+        let message = req.body.message;
+        let urlimg = "http://localhost:4040/api/images/dl/"+req.file.filename;
+        let _id = req.body.id_question;
+
+        //var sql = "INSERT INTO forum (titre,auteur,message,urlimg,quand) VALUES(?,?,?,?,NOW())";
+        var sql ="UPDATE forum SET titre=?,auteur=?,message=?,urlimg=?,quand=NOW() WHERE _id=?";
+        var inserts = [titre,auteur,message,urlimg,_id];
+        sql = mysql.format(sql,inserts);
+        connectdb.query(sql, function(err,result){
+            if (err) throw err ;
+            console.log("Message posté");
+            res.status(202).json({message:'Request accepted'});
+        });
+    } else {
+        console.log('Connect MODIF sans IMG')
+        let titre = req.body.titre;
+        let auteur= req.body.auteur;
+        let message = req.body.message;
+        let _id = req.body.id_question;
+
+        var sql ="UPDATE forum SET titre=?,auteur=?,message=? WHERE _id=?";
+        var inserts = [titre,auteur,message,_id];
+        sql = mysql.format(sql,inserts);
+        connectdb.query(sql, function(err,result){
+            if (err) throw err ;
+            console.log("Message posté");
+            res.status(202).json({message:'Request accepted'});
+            });
+        };
+ }

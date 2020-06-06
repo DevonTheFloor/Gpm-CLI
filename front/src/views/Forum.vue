@@ -4,7 +4,7 @@
     <div class="forum" >
       <Head page="/#/vous-etes-ici"/>
       <form v-show="seen" enctype="multipart/form-data" id="formpost">
-        <input type="hidden" id="auteur" name="auteur" :value="email">
+        <input type="hidden" id="auteur" name="auteur" :value="auteur">
         <label>Titre : <input type="text" id="titre" name="titre" v-model="titre"> </label>
         <label>Message : <textarea id="message" name="message" v-model="message"></textarea> </label>
         <input type="file" id="file" @change="onFileSelected"/>
@@ -41,7 +41,8 @@ export default {
         email: '',
         mdp:'',
         titre:'',
-        message:''
+        message:'',
+        auteur:''
       }
     },
 
@@ -52,28 +53,29 @@ export default {
 			seeform(){
           this.seen = true;
           this.seeAll = false
-        },
-        poster(e){
-          e.preventDefault();
-          let token = localStorage.getItem('token');
-          let email = localStorage.getItem('email');
-          this.auteur = email;
-          let formpost = document.getElementById('formpost')
-          let fd = new FormData(formpost);
-          this.axios.post("http://localhost:4040/api/forum/post",fd,
-           {
-             headers:{
-               "Authorization":"Bearer "+token,
-               'Content-Type': 'multipart/form-data'
-             }
-           })
-           .then(response =>{console.log(response)})
-           .catch(error => {console.log(error)});
-           location.reload(); 
+      },
+      poster(e){
+        e.preventDefault();
+        let token = localStorage.getItem('token');
+        let email = localStorage.getItem('email');
+        console.log(email);
+        let formpost = document.getElementById('formpost')
+        let fd = new FormData(formpost);
+        this.axios.post("http://localhost:4040/api/forum/post",fd,
+          {
+            headers:{
+              "Authorization":"Bearer "+token,
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(response =>{console.log(response)})
+          .catch(error => {console.log(error)});
+          location.reload(); 
         }
     },
     mounted(){
-
+      let auteur =localStorage.getItem('email');
+      this.auteur = auteur;
       let token = localStorage.getItem('token');
       console.log("tokenStorage: ",token);
       var config = {
