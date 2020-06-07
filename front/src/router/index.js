@@ -8,6 +8,7 @@ import Chat from '../views/Chat'
 import Market from '../views/Market'
 import Statistic from '../views/Statistic'
 import Test from '../views/Test'
+import Homesign from '../views/Homesign'
 
 Vue.use(VueRouter)
 
@@ -52,6 +53,11 @@ Vue.use(VueRouter)
     path: '/stat',
     name: 'Statistic',
     component: Statistic
+  },
+  {
+    path: '/signup',
+    name: 'Homesign',
+    component: Homesign
   },
   {
     path: '/test',

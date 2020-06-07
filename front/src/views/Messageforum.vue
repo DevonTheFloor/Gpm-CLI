@@ -6,7 +6,7 @@
 
       <div class="listForum">
         <button v-show="item.auteur == auteur || isadm == 'true'" @click="deletemsg" class="dbtna">x</button>
-        <button v-show="item.auteur == auteur" @click="seemodifier" class="dbtnm">modifier</button>
+        <button v-show="item.auteur == auteur || isadm == 'true'" @click="seemodifier" class="dbtnm">modifier</button>
         <h2>{{ item.titre }} </h2>
         <p>Par : {{ item.auteur }}</p>
         <p>le: {{ item.quand }}</p>
@@ -210,6 +210,11 @@ export default {
   color: blue;
   background-color: rgb(153, 153, 248);
   border-radius: 5px;
+  &d{
+    background-color: rgb(187, 139, 231);
+    color :blueviolet;
+    border-radius: 5px;
+  }
 }
 .modifForum{
   background-color:whitesmoke;

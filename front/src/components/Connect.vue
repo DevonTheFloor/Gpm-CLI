@@ -47,7 +47,7 @@ export default {
         },
          createUser(e){
       e.preventDefault();
-      console.log("form submit");
+      console.log("form signup submit");
        
       let adduser = {
         email: this.email,

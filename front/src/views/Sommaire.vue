@@ -3,7 +3,7 @@
     <Head page="http://localhost:8080/"/>
     <p  @click="disconnection" class="disconnect"><router-link to="/">disconnect</router-link></p>
 
-    <p > IS ADMIN : {{ isadm }} </p>
+    <p > IS ADMIN : {{ this.isadm }} </p>
 
      <section class="menuSom">
       <h2><router-link to="/zi-forum">FORUM</router-link></h2>
@@ -48,11 +48,11 @@ export default {
       }
     },
     mounted(){
-      console.log('isadmi :',this.isadm)
-      let droit = localStorage.getItem('isadm');
-      console.log("droit :",droit);
-      this.isadm = droit;
-      console.log('newisAdmin :',this.isadm);
+      let isadm = localStorage.getItem('isadm');
+      console.log('isadm',isadm);
+      this.isadm = isadm;
+      
+
     }
 }
 

@@ -22,7 +22,7 @@ export default {
     methods:{
       loginuser (e){
       e.preventDefault();
-      console.log("form submit");
+      console.log("form login submit");
       let loginfo ={
           email: this.email,
           mdp: this.mdp
@@ -33,18 +33,8 @@ export default {
             console.log(response.data),
             localStorage.setItem("email",response.data.email),
             localStorage.setItem("token",response.data.token)
-
             })
-            /*.then(()=>{
-              let token = localStorage.getItem('token');
-              this.axios.get('http://localhost:4040/api/',
-              { headers: 
-                {'Aunthorisation': 'Bearer '+token}},
-              )*/
             .then( window.location.assign('http://localhost:8080/#/vous-etes-ici'))
-              //.then(()=>{console.log("OKAAAAAAAAAy!!")})
-              /*.catch(()=>{console.log("erreur redirection")});
-              })*/
           .catch(function (error) {
             console.log(error);
             });

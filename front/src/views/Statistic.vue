@@ -6,7 +6,7 @@
 		<p>Liste des derniers messages des différents salons</p>
     <h2 class="menuStat"> Forum :</h2>
 		<div v-for="formsg in forst" :key="formsg.id" class="statp">
-			<div><p>n°: {{ formsg._id }} <i> Auteur</i> : {{ formsg.auteur }} <i>Titre</i> : {{ formsg.titre }}  <img :src="formsg.urlimg" class="mini"></p></div> <div><button class="dbtn"  @click="delmsgforum">x</button></div>
+			<div><p>n°: {{ formsg._id }} <i> Auteur</i> : {{ formsg.auteur }} <i>Titre</i> : {{ formsg.titre }}  <img :src="formsg.urlimg" class="mini"></p></div> <div> <router-link to="'http://localhost:8080/#/voir-un-message'+formsg._id"><button >voir</button></router-link>  </div>
 		</div>
 		<h2 class="menuStat">Market place :</h2>
 		<div v-for="makmsg in makst" :key="makmsg.id" class="statp">
