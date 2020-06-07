@@ -15,7 +15,7 @@
 		<section  class="clo-lg-8 "  v-for="article in annonce" :key="article.id">
     <div class="listForum">
 			<Deletebtn v-if="article.auteur == auteur"/>
-			<button class="dbtna" v-if="isadm == 'true'" @click="deletemsg">x</button>
+			<button class="dbtna" v-if="isadm == 'true' || email == article.auteur" @click="deletemsg">x</button>
 			<a  href="/api/market/post/:id"><h4> {{article.titre}} </h4></a>
 			<p>par: {{ article.auteur }}</p>
       <p> {{ article.annonce}} </p>
@@ -71,9 +71,13 @@ export default {
 			this.visible = false;
 			this.seen = true;
 		},
-		annoncer(){
+		annoncer(e){
+			e.preventDefault();
 			let annoncer = document.getElementById('postannonce');
+			let email = localStorage.getItem('email');
+			this.auteur = email;
 			let fd = new FormData(annoncer);
+			console.log("CLICK!")
 			this.axios.post("http://localhost:4040/api/market/post",fd,{
 			headers:{
 				"Authorization":"Bearer "+this.token
@@ -81,7 +85,8 @@ export default {
 			})
 			.then(response => {
 			this.annonce = response.data,
-			console.log(response.data)
+			console.log(response.data),
+			window.location.reload();
 			})
 			.catch(error =>{console.log(error)});
 		},
@@ -90,8 +95,8 @@ export default {
 	mounted(){
 		let isadm = localStorage.getItem('isadm');
 		this.isadm= isadm;
-		let nameauteur = localStorage.getItem('email');
-		this.auteur = nameauteur;
+		let email = localStorage.getItem('email');
+		this.auteur = email;
 		let token = localStorage.getItem('token');
 		this.token = token;
 		this.axios.get("http://localhost:4040/api/market/all",{
