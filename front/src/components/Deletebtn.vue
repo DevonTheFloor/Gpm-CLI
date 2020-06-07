@@ -15,7 +15,7 @@ export default {
 		deletemsg(){
 			console.log('COUCOU');
 			let idm = this.id_question;
-      console.log(idm);
+			console.log(idm);
       let token = localStorage.getItem('token');
       token;
       console.log('CLICKING !!')

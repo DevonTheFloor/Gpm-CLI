@@ -136,7 +136,9 @@ export default {
           .then(function(response) {
             console.log(response.data),
             localStorage.setItem("email",response.data.email),
-            localStorage.setItem("token",response.data.token)
+            localStorage.setItem("token",response.data.token),
+            localStorage.setItem('idu',response.data.idu),
+            localStorage.setItem('isadm',response.data.isadm)
             })
             .then( window.location.assign('http://localhost:8080/#/vous-etes-ici'))
           .catch(function (error) {

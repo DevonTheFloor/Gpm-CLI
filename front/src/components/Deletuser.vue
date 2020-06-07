@@ -14,6 +14,7 @@ export default {
 
 	methods:{
 		deletuser(){
+			window.confirm('Etes vous sûr de vouloir effacer ce compte?\n Cette action est irreversible!');
 			let idu = localStorage.getItem('idu');
 			console.log('idu :',idu);
 			let token = localStorage.getItem('token');

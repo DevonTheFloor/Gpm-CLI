@@ -11,9 +11,9 @@ const connectdb = require('../queries/connectdb');
     let mdp = req.body.mdp;
     let isadm = req.body.isadm;
     bcrypt.hash(mdp,10).then(hash => {
-           email = email;
+          email = email;
           mdp = hash;
-          isadm = 0; 
+          isadm = false; 
 
           console.log("Connecté mySQL on Xampp !!");
           var sql = "INSERT INTO users (email,mdp,isadm) VALUES(?,?,?)";
@@ -49,7 +49,7 @@ const connectdb = require('../queries/connectdb');
           if (!valid) {
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
         }else {
-          res.status(200).json({email: req.body.email,isadm:elemt.isadm,id:elemt._id,
+          res.status(200).json({email: elemt.email,isadm: elemt.isadm,idu: elemt._id,
             token: jwt.sign({ email: elemt.email },'RANDOM_TOKEN_SECRET',{ expiresIn: '24h' })
           })
         }
