@@ -125,7 +125,7 @@ exports.getAllRes = (req,res,next)=>{
 
 exports.forumStat = (req,res,next)=>{
   console.log("Connecté FORUM Admin getAll !!");
-  var qy1 = "SELECT * FROM forum ORDER BY quand DESC LIMIT 5 ";
+  var qy1 = "SELECT * FROM forum ORDER BY quand DESC LIMIT 7 ";
   connectdb.query(qy1, function(err,result){
     if (err) throw err ;
     console.log(result);

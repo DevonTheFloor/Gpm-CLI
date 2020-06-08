@@ -6,15 +6,15 @@
 		<p>Liste des derniers messages des différents salons</p>
     <h2 class="menuStat"> Forum :</h2>
 		<div v-for="formsg in forst" :key="formsg.id" class="statp">
-			<div><p>n°: {{ formsg._id }} <i> Auteur</i> : {{ formsg.auteur }} <i>Titre</i> : {{ formsg.titre }}  <img :src="formsg.urlimg" class="mini"></p></div> <div> <router-link to="'http://localhost:8080/#/voir-un-message'+formsg._id"><button >voir</button></router-link>  </div>
+			<div><p>n°: {{ formsg._id }} <i> Auteur</i> : {{ formsg.auteur }} <i>Titre</i> : {{ formsg.titre }}  <img :src="formsg.urlimg" class="mini"></p></div> <div> <a :href="'http://localhost:8080/#/voir-un-message?id='+formsg._id" target="_blank"><button class="voir">voir</button></a>  </div>
 		</div>
 		<h2 class="menuStat">Market place :</h2>
 		<div v-for="makmsg in makst" :key="makmsg.id" class="statp">
-			<div><p>n°: {{ makmsg._id }} <i>De : </i> {{ makmsg.auteur }} <i>Categori : </i> <b>{{  makmsg.categorie }}</b> <i>titre : </i>{{  makmsg.titre }} <img :src="makmsg.urlimg" class="mini"></p></div><div><Deletbtn @click="delmsgmarket"/></div>
+			<div><p>n°: {{ makmsg._id }} <i>De : </i> {{ makmsg.auteur }} <i>Categori : </i> <b>{{  makmsg.categorie }}</b> <i>titre : </i>{{  makmsg.titre }} <img :src="makmsg.urlimg" class="mini"></p></div><div> <a href="/#/market-place" target="_blank"><button class="voir" >voir</button></a> </div>
 		</div>
 		<h2 class="menuStat">Chat :</h2>
 		<div v-for="chmsg in chst" :key="chmsg.id" class="statp">
-			<div><p>n°: {{ chmsg._id }} <i>De : </i> {{ chmsg.auteur }} <i> msg : </i> {{ chmsg.message }} </p> </div><div><Deletbtn @click="delmsgchat"/></div>
+			<div><p>n°: {{ chmsg._id }} <i>De : </i> {{ chmsg.auteur }} <i> msg : </i> {{ chmsg.message }} </p> </div><div><a href="/#/chat-live" target="_blank"><button class="voir">voir</button></a></div>
 		</div>
 
     </section>
@@ -22,12 +22,11 @@
 </template>
 
 <script>
-import Deletbtn from '../components/Deletebtn'
 import Head from '../components/Head'
 export default {
 	name: 'Statistic',
 	components:{
-		Deletbtn,
+
 		Head
 	},
 	data(){
@@ -104,5 +103,14 @@ export default {
 	color: red;
 	background-color: rgb(245, 161, 161);
 	border: 1px solid red;
+	&:hover{
+		background-color:rgb(204, 117, 59) ;
+	}
+}
+.voir{
+	background-color: whitesmoke;
+	&:hover{
+		background-color: wheat;
+	}
 }
 </style>

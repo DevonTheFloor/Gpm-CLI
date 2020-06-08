@@ -37,7 +37,7 @@
 
 	<div class="form-group" :class="{ 'form-group--error': $v.mdp.$error }">
     <label class="form__label">Mot de passe</label>
-    <input class="form__input" v-model.trim="$v.mdp.$model"/>
+    <input type="password" class="form__input" v-model.trim="$v.mdp.$model"/>
   </div>
   <div class="error_1" v-if="!$v.mdp.required">Mot de passe requis</div>
   <div class="error" v-if="!$v.mdp.minLength">Doit avoir au moins {{$v.mdp.$params.minLength.min}} caractères.</div>
