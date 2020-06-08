@@ -144,6 +144,9 @@ export default {
         this.auteur = nameAuteur;
         let token = localStorage.getItem('token');
         this.token = token;
+        if(token == null){
+          window.history.back();
+          }
         //récupération de l'id du message dans l'url
         let uri1 = document.location.href;
         console.log(uri1);

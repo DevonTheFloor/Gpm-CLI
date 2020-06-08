@@ -127,7 +127,7 @@ export default {
         this.submitStatus = 'ERROR'
       } else {
           console.log("form login submit");
-      let loginfo ={
+          let loginfo ={
           email: this.email,
           mdp: this.mdp
         }
@@ -140,7 +140,7 @@ export default {
             localStorage.setItem('idu',response.data.idu),
             localStorage.setItem('isadm',response.data.isadm)
             })
-            .then( window.location.assign('http://localhost:8080/#/vous-etes-ici'))
+            .then(setTimeout(function(){  window.location.assign('http://localhost:8080/#/vous-etes-ici') },1300))
           .catch(function (error) {
             console.log(error);
             });

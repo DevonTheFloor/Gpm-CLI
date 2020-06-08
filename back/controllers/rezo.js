@@ -17,8 +17,8 @@ exports.postOne = (req,res,next)=>{
     let auteur = req.body.auteur;
     let message = req.body.message;
     console.log("req.body = ",req.body);
-    console.log("Connecté mySQL on Xampp !!");
-      var sql = "INSERT INTO rezo VALUES(NULL,?,?,NOW())";
+    console.log("Connected POST chat !!");
+      var sql = "INSERT INTO rezo (auteur,message,quand) VALUES(?,?,NOW())";
       var inserts = [auteur,message];
       sql = mysql.format(sql,inserts);
       connectdb.query(sql, function(err,result){

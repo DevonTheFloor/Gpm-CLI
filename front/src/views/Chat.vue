@@ -33,11 +33,16 @@ export default {
 		return{
 			chat:'',
 			email: '',
-			message:''
+      message:'',
+      token:''
 		}
 	},
 	mounted(){
     let token = localStorage.getItem('token');
+    this.token = token;
+    if(token == null){
+      window.history.back();
+      }
 
     this.axios.get("http://localhost:4040/api/rezo/posts",{
       headers:{

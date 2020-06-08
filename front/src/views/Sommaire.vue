@@ -37,6 +37,7 @@ export default {
   data(){
     return{
       isadm: '',
+      token:''
     }
   },
     computed: {
@@ -49,6 +50,11 @@ export default {
       }
     },
     mounted(){
+      let token = localStorage.getItem('token');
+      this.token = token;
+      if(token == null){
+        window.history.back();
+      }
       let isadm = localStorage.getItem('isadm');
       console.log('isadm',isadm);
       this.isadm = isadm;
