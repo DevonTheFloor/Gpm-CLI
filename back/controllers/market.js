@@ -53,6 +53,20 @@ exports.postOne = (req,res,next)=>{
     }
   }
 
+  exports.deleteOne = (req,res,next)=>{
+
+    console.log("Connect DeleteOneMarket");
+    let id_message = req.params.id;
+    var sql = "DELETE FROM market WHERE _id=?";
+     var inserts = [id_message];
+    sql = mysql.format(sql,inserts);
+    connectdb.query(sql,function(err,result){
+    	if (err) throw err ;
+   		console.log("delete on");
+    	res.status(200).json({message:"post deleted"});
+    });
+}
+
   exports.statMarket = (req,res,next)=>{
     console.log("Connecté mySQL on getAll !!");
 	  var qy1 = "SELECT * FROM market ORDER BY quand DESC LIMIT 7 ";

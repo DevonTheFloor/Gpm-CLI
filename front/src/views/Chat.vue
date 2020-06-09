@@ -1,6 +1,6 @@
 <template>
 <div >	
-  <Head class="headchat"/>
+  <Head class="headchat" page="http://localhost:8080/#/vous-etes-ici"/>
   <section class="justify-content-lg-center formForum chat"  id="message">
     <div v-for="tweet in chat" :key="tweet.id">
       <p>{{tweet.auteur}}</p>
@@ -11,10 +11,10 @@
 
 	<footer class="messrezo justify-content-lg-center">
     <div class="col-lg-12">
-      <form action="http://localhost:4040/api/rezo/post" method="post" >
+      <form id="chating">
         <input type="hidden" id="auteur" name="auteur" :value="email">
         <label>Message: <textarea id="message" name="message" cols="50" v-model="message"></textarea></label>
-        <button type="submit">Send</button>
+        <button @click="chater">Chatez !</button>
       </form>
     </div>
   </footer>
@@ -36,8 +36,27 @@ export default {
       message:'',
       token:''
 		}
-	},
+  },
+  methods:{
+    chater(e){
+    e.preventDefault();
+    let chating = document.getElementById('chating');
+    let fd = new FormData(chating);
+    console.log('fd :',fd);
+
+    this.axios.post('http://localhost:4040/api/rezo/post',fd,{
+      headers:{
+          "Authorization":"Bearer "+this.token
+      }
+    })
+    .then(()=>{console.log(this.message)})
+    .catch(error =>{console.log(error)});
+  }
+  }
+  ,
 	mounted(){
+    let email = localStorage.getItem('email');
+    this.email = email;
     let token = localStorage.getItem('token');
     this.token = token;
     if(token == null){

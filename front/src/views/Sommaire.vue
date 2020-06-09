@@ -1,9 +1,7 @@
 <template>
   <div class="sommaire">
     <Head page="http://localhost:8080/"/>
-    <p  @click="disconnection" class="disconnect"><router-link to="/">disconnect</router-link></p>
-
-    <p > IS ADMIN : {{ this.isadm }} </p>
+    <p  @click="disconnection" class="disconnect"><router-link to="/">disconnect<br>{{ email }} </router-link></p>
 
      <section class="menuSom">
       <h2><router-link to="/zi-forum">FORUM</router-link></h2>
@@ -37,7 +35,8 @@ export default {
   data(){
     return{
       isadm: '',
-      token:''
+      token:'',
+      email:''
     }
   },
     computed: {
@@ -58,6 +57,8 @@ export default {
       let isadm = localStorage.getItem('isadm');
       console.log('isadm',isadm);
       this.isadm = isadm;
+      let pseudo = localStorage.getItem('email');
+      this.email = pseudo;
       
 
     }

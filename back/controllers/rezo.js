@@ -13,8 +13,8 @@ exports.getAll = (req,res,next)=>{
   }
 
 exports.postOne = (req,res,next)=>{
-
-    let auteur = req.body.auteur;
+    if(!req.file)
+    {let auteur = req.body.auteur;
     let message = req.body.message;
     console.log("req.body = ",req.body);
     console.log("Connected POST chat !!");
@@ -26,6 +26,9 @@ exports.postOne = (req,res,next)=>{
           console.log("Message posté");
           res.redirect("http://localhost:8080/#/chat-live");
       });
+    }else {
+      res.status(204).json({message:"requête incorrecte"})
+    }
   }
 
   exports.statChat = (req,res,next)=> {

@@ -77,6 +77,9 @@ export default {
       let auteur =localStorage.getItem('email');
       this.auteur = auteur;
       let token = localStorage.getItem('token');
+      if(token == null){
+				window.history.back();
+			}
       console.log("tokenStorage: ",token);
       var config = {
       headers: { 

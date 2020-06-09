@@ -11,15 +11,17 @@
   </nav>
 
   <button id="addAnnonce" @click="seeForm">Poster une annonce</button>
+
 	<div v-show="visible" class="market">
-		<section  class="clo-lg-8 "  v-for="article in annonce" :key="article.id">
+		<section  class="clo-lg-8 "  v-for="article in annonces" :key="article.id">
     <div class="listForum">
-			<Deletebtn v-if="article.auteur == auteur"/>
+					
 			<button class="dbtna" v-if="isadm == 'true' || email == article.auteur" @click="deletemsg">x</button>
 			<a  href="/api/market/post/:id"><h4> {{article.titre}} </h4></a>
 			<p>par: {{ article.auteur }}</p>
       <p> {{ article.annonce}} </p>
 			<img class="picmarket" :src="article.urlimg">
+				Annonce : {{ article._id}}
     </div>
     </section>
 	</div>
@@ -46,29 +48,32 @@
 
 <script>
 import Head from '../components/Head'
-import Deletebtn from '../components/Deletebtn'
+
 export default {
 	name: 'Market',
 	components:{
 		Head,
-		Deletebtn
+
 	},
 	data(){
 		return{
 			visible: true,
 			seen: false,
 			annonce: '',
+			annonces:'',
 			categorie:'',
 			auteur:'',
 			email:'',
 			titre:'',
 			isadm:'',
-			token:''
+			idm:'',
+			token:'',
+			article:''
 		}
 	},
 	methods:{
 		seeForm(){
-			this.visible = false;
+			this.visible = false;this.id_question;
 			this.seen = true;
 		},
 		annoncer(e){
@@ -77,7 +82,6 @@ export default {
 			let email = localStorage.getItem('email');
 			this.auteur = email;
 			let fd = new FormData(annoncer);
-			console.log("CLICK!")
 			this.axios.post("http://localhost:4040/api/market/post",fd,{
 			headers:{
 				"Authorization":"Bearer "+this.token
@@ -90,7 +94,21 @@ export default {
 			})
 			.catch(error =>{console.log(error)});
 		},
-		deletemsg(){}
+		deletemsg(){
+			console.log('COUCOU');
+			window.confirm('Etes vous sûr de vouloir effacer ce mesage?');
+			let idm = this.article._id;
+			console.log(idm);
+			console.log('CLICKING !!');
+			
+      /*this.axios.delete('http://localhost:4040/api/market/deleteone/'+idm,{
+        headers:{
+          "Authorization":"Bearer "+this.token
+          }
+        })
+        .then(()=>{window.location.assign('http://localhost:8080/#/market-place')})
+        .catch(error => {console.log(error)});*/
+      }
 	},
 	mounted(){
 		let isadm = localStorage.getItem('isadm');
@@ -108,7 +126,7 @@ export default {
 				}
 			})
 			.then(response => {
-			this.annonce = response.data,
+			this.annonces = response.data,
 			console.log(response.data)
 			})
 			.catch(error =>{console.log(error)});

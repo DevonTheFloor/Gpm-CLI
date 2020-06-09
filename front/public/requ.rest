@@ -9,12 +9,6 @@ Content-Type: application/json
 GET http://localhost:4040/api/forum/posts
 
 ###
-GET http://localhost:4040/api/forum/post/14
-
-headers:{
-    "Authorization": "Bearer KSA29E432SVOkeAbarh3gIUzHp9OsjWmQdOdnAnC7Os"
-}
-###
 POST http://localhost:4040/api/forum/reponse
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QiLCJpYXQiOjE1OTEwOTk2NTYsImV4cCI6MTU5MTE4NjA1Nn0.F4C6ICOj5lVkSB2uOEiEqQFRfgxBn0m-YMjufurWLZM
@@ -45,6 +39,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QiL
 {
     "message":"test",
     "urlimg":"http://"
+}
+
+###
+DELETE http://localhost:4040/api/market/deleteone/20
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMSIsImlhdCI6MTU5MTY3ODUzNiwiZXhwIjoxNTkxNzY0OTM2fQ.f9NJ_SJc0a2NtK6f1Jwi7VCkJFhyO_jPwC20yxr1ujs
+###
+POST http://localhost:4040/api/rezo/post
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMSIsImlhdCI6MTU5MTY3ODUzNiwiZXhwIjoxNTkxNzY0OTM2fQ.f9NJ_SJc0a2NtK6f1Jwi7VCkJFhyO_jPwC20yxr1ujs
+
+{
+    "auteur":"the haakerz",
+    "message":"vilain message from zi hakerzs"
 }
 
 ###
