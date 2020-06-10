@@ -1,5 +1,5 @@
 <template>
-<div >	
+<div class="justify">	
   <Head class="headchat" page="http://localhost:8080/#/vous-etes-ici"/>
   <section class="justify-content-lg-center formForum chat"  id="message">
     <div v-for="tweet in chat" :key="tweet.id">
@@ -16,12 +16,6 @@
         <label>Message: <textarea id="message" name="message" cols="50" v-model="message"></textarea></label>
         <button @click="chater">Chatez !</button>
       </form>
-
-        <!--<form action="http://localhost:4040/api/rezo/post" method="POST" enctype="multipart/form-data" id="chating">
-        <input type="hidden" id="auteur" name="auteur" value="Joe">
-        <label>Message: <textarea id="message" name="message" value="un message cool" cols="50"></textarea></label>
-        <button type="submit">form data</button>
-      </form>-->
     </div>
   </footer>
 	</div>

@@ -27,4 +27,7 @@ export default {
 .laclass{
   max-width: 50px;
 }
+.home{
+  text-align: center;
+}
 </style>

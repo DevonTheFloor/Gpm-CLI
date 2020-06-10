@@ -16,5 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+header{
+min-width: 100%;
+}
 </style>

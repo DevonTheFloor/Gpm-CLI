@@ -1,6 +1,6 @@
 <template>
 
-	<div id="getOne" class=" Messageforum justify-content-lg-center " >
+	<div id="getOne" class=" Messageforum justify" >
     <Head page='/#/zi-forum'/>
     <section class=" col-lg-10" v-for="item in info" :key="item.id">
 

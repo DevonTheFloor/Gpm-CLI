@@ -1,5 +1,5 @@
 <template>
-<div class="market">
+<div class="market justify">
 	<Head page="http://localhost:8080/#/vous-etes-ici"/>
 	<nav class="menuMarket">
     <ol>
@@ -12,16 +12,12 @@
 
   <button id="addAnnonce" @click="seeForm">Poster une annonce</button>
 
-	<div v-show="visible" class="market">
-		<section  class="clo-lg-8 "  v-for="article in annonces" :key="article.id">
+	<div v-show="visible" class="showbloc" >
+		<section  v-for="article in annonces" :key="article.id">
     <div class="listForum">
-					
-			<button class="dbtna" v-if="isadm == 'true' || email == article.auteur" @click="deletemsg">x</button>
-			<a  href="/api/market/post/:id"><h4> {{article.titre}} </h4></a>
+			<a  :href="'http://localhost:8080/#/voir-une-annonce?id='+article._id"><h4> {{article.titre}} </h4></a>
 			<p>par: {{ article.auteur }}</p>
       <p> {{ article.annonce}} </p>
-			<img class="picmarket" :src="article.urlimg">
-				Annonce : {{ article._id}}
     </div>
     </section>
 	</div>
@@ -68,12 +64,13 @@ export default {
 			isadm:'',
 			idm:'',
 			token:'',
-			article:''
+			article:'',
+			annonceId: ''
 		}
 	},
 	methods:{
 		seeForm(){
-			this.visible = false;this.id_question;
+			this.visible = false;
 			this.seen = true;
 		},
 		annoncer(e){
@@ -93,22 +90,7 @@ export default {
 			window.location.reload();
 			})
 			.catch(error =>{console.log(error)});
-		},
-		deletemsg(){
-			console.log('COUCOU');
-			window.confirm('Etes vous sûr de vouloir effacer ce mesage?');
-			let idm = this.article._id;
-			console.log(idm);
-			console.log('CLICKING !!');
-			
-      /*this.axios.delete('http://localhost:4040/api/market/deleteone/'+idm,{
-        headers:{
-          "Authorization":"Bearer "+this.token
-          }
-        })
-        .then(()=>{window.location.assign('http://localhost:8080/#/market-place')})
-        .catch(error => {console.log(error)});*/
-      }
+		}
 	},
 	mounted(){
 		let isadm = localStorage.getItem('isadm');
@@ -127,6 +109,8 @@ export default {
 			})
 			.then(response => {
 			this.annonces = response.data,
+			this.annonceId = response.data._id,
+			console.log('anId :', response.data._id),
 			console.log(response.data)
 			})
 			.catch(error =>{console.log(error)});
@@ -135,11 +119,7 @@ export default {
 </script>
 
 <style lang="scss">
-.picmarket {
-  width: 50%;
-  border:2px solid black;
-  box-shadow: 3px 3px 3px grey;
-}
+
 .imgMsg{
   max-width: 50%;
   background-origin: 2px solid white;
@@ -150,11 +130,13 @@ export default {
   width: 90%;
   padding: 1%;
   margin: 1%;
+	width: 100%;
 }
 .menuMarket{
   border: 2px solid grey;
   background-color: beige;
   color:red;
+	width: 100%;
 }
 ol{
 	display: flex;
@@ -167,4 +149,14 @@ ol{
 	background-color: rgb(240, 197, 118);
 	border: 1px solid red;
 }
+.market{
+	width: 100%;
+}
+.showbloc{
+	width: 70%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
 </style>

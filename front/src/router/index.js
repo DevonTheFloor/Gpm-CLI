@@ -8,6 +8,7 @@ import Chat from '../views/Chat'
 import Market from '../views/Market'
 import Statistic from '../views/Statistic'
 import Test from '../views/Test'
+import Annonce from '../views/Annonce'
 
 
 Vue.use(VueRouter)
@@ -31,7 +32,6 @@ Vue.use(VueRouter)
   {
     path: '/zi-forum',
     name: 'Forum',
-    //component: Forum
     component: ()=> import('../views/Forum')
   },
   {
@@ -48,6 +48,11 @@ Vue.use(VueRouter)
     path: '/market-place',
     name: 'Market',
     component: Market
+  },
+  {
+    path: '/voir-une-annonce',
+    name: 'Annonce',
+    component: Annonce
   },
   {
     path: '/stat',

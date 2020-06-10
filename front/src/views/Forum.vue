@@ -1,7 +1,6 @@
 <template>
   
-  <!--<div id="messagesForum" class="forum  justify-content-lg-center " >-->
-    <div class="forum" >
+    <div class="forum justify" >
       <Head page="/#/vous-etes-ici"/>
       <form v-show="seen" enctype="multipart/form-data" id="formpost">
         <input type="hidden" id="auteur" name="auteur" :value="auteur">

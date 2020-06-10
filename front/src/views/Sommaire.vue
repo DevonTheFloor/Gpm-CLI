@@ -1,5 +1,5 @@
 <template>
-  <div class="sommaire">
+  <div class="sommaire justify" >
     <Head page="http://localhost:8080/"/>
     <p  @click="disconnection" class="disconnect"><router-link to="/">disconnect<br>{{ email }} </router-link></p>
 
@@ -106,4 +106,5 @@ h1{
 .mesadm{
   color: blue;
 }
+
 </style>

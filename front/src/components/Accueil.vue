@@ -1,19 +1,17 @@
 <template>
-
+  <div class="accueil">
     <section class="col-lg-12">
       <figure class="col-lg-8 offset-lg-2 " id="logo">
         <img class="img-fluid logoenter" src="../assets/image/logo/icon2.png" id="logokey" alt="icon groupomania" >
       </figure>
     </section>
-
+  </div>
 </template>
 
 <script>
 export default {
-
   name: 'Accueil',
-
-  }
+}
 
 </script>
 
@@ -39,6 +37,9 @@ main {
   100% {
     transform: rotate(360deg);
   }
+}
+.accueil{
+  text-align: center;
 }
 
 </style>

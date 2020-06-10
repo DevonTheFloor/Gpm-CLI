@@ -55,3 +55,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluM
 }
 
 ###
+GET http://localhost:4040/api/market/see/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMSIsImlhdCI6MTU5MTc2NDY5MywiZXhwIjoxNTkxODUxMDkzfQ.nIb436DB4wNmXEAGB5lwxbJGv8XfhXl3xA6VcB77riQ
+
+###

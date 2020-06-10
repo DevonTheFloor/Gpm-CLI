@@ -1,53 +1,53 @@
 <template>
-<div>
+<div class="conneclate">
   <p id="confMessage"> </p>
-<button @click="seesign" class="btnch">S'enregistrer</button>
-<button @click="seelog" class="btnch">Se connecter</button>
-<hr>
-<br>
-<form v-show="sign" @submit.prevent="submit">
-  <div class="form-group" :class="{ 'form-group--error': $v.email.$error }">
-    <label class="form__label">Pseudo :</label>
-    <input class="form__input" v-model.trim="$v.email.$model"/>
-  </div>
-  <div class="error_1" v-if="!$v.email.required">Champs email obligatoire</div>
-  <div class="error" v-if="!$v.email.minLength">Email doit avoir au moins {{$v.email.$params.minLength.min}} caractères.</div>
+  <button @click="seesign" class="btnch">S'enregistrer</button>
+  <button @click="seelog" class="btnch">Se connecter</button>
+  <hr>
+  <br>
+  <form v-show="sign" @submit.prevent="submit">
+    <div class="form-group" :class="{ 'form-group--error': $v.email.$error }">
+      <label class="form__label">Pseudo :</label>
+      <input class="form__input" v-model.trim="$v.email.$model"/>
+    </div>
+    <div class="error_1" v-if="!$v.email.required">Champs email obligatoire</div>
+    <div class="error" v-if="!$v.email.minLength">Email doit avoir au moins {{$v.email.$params.minLength.min}} caractères.</div>
 
-	<div class="form-group" :class="{ 'form-group--error': $v.mdp.$error }">
-    <label class="form__label">Mot de passe :</label>
-    <input type="password" class="form__input" v-model.trim="$v.mdp.$model"/>
-  </div>
-  <div class="error_1" v-if="!$v.mdp.required">Mot de passe requis</div>
-  <div class="error" v-if="!$v.mdp.minLength">Doit avoir au moins {{$v.mdp.$params.minLength.min}} caractères.</div>
+    <div class="form-group" :class="{ 'form-group--error': $v.mdp.$error }">
+      <label class="form__label">Mot de passe :</label>
+      <input type="password" class="form__input" v-model.trim="$v.mdp.$model"/>
+    </div>
+    <div class="error_1" v-if="!$v.mdp.required">Mot de passe requis</div>
+    <div class="error" v-if="!$v.mdp.minLength">Doit avoir au moins {{$v.mdp.$params.minLength.min}} caractères.</div>
   
  
-  <button class="button senregistrer" type="submit" :disabled="submitStatus === 'PENDING'">S'enregistrer</button>
-  <p class="typo__p1" v-if="submitStatus === 'OK'">Merci!</p>
-  <p class="typo__p2" v-if="submitStatus === 'ERROR'">Merci de renseigner correctement les champs.</p>
-  <p class="typo__p3" v-if="submitStatus === 'PENDING'">Envoi...</p>
-</form>
+    <button class="button senregistrer" type="submit" :disabled="submitStatus === 'PENDING'">S'enregistrer</button>
+    <p class="typo__p1" v-if="submitStatus === 'OK'">Merci!</p>
+    <p class="typo__p2" v-if="submitStatus === 'ERROR'">Merci de renseigner correctement les champs.</p>
+    <p class="typo__p3" v-if="submitStatus === 'PENDING'">Envoi...</p>
+  </form>
 
-<form  v-show ="login" @submit.prevent="connecting">
-  <div class="form-group" :class="{ 'form-group--error': $v.email.$error }">
-    <label class="form__label">Pseudo : </label>
-    <input class="form__input" v-model.trim="$v.email.$model"/>
-  </div>
-  <div class="error_1" v-if="!$v.email.required">Champs email obligatoire</div>
-  <div class="error" v-if="!$v.email.minLength">Email doit avoir au moins {{$v.email.$params.minLength.min}} caractères.</div>
+  <form  v-show ="login" @submit.prevent="connecting">
+    <div class="form-group" :class="{ 'form-group--error': $v.email.$error }">
+      <label class="form__label">Pseudo : </label>
+      <input class="form__input" v-model.trim="$v.email.$model"/>
+    </div>
+    <div class="error_1" v-if="!$v.email.required">Champs email obligatoire</div>
+    <div class="error" v-if="!$v.email.minLength">Email doit avoir au moins {{$v.email.$params.minLength.min}} caractères.</div>
 
-	<div class="form-group" :class="{ 'form-group--error': $v.mdp.$error }">
-    <label class="form__label">Mot de passe :</label>
-    <input type="password" class="form__input" v-model.trim="$v.mdp.$model"/>
-  </div>
-  <div class="error_1" v-if="!$v.mdp.required">Mot de passe requis</div>
-  <div class="error" v-if="!$v.mdp.minLength">Doit avoir au moins {{$v.mdp.$params.minLength.min}} caractères.</div>
+    <div class="form-group" :class="{ 'form-group--error': $v.mdp.$error }">
+      <label class="form__label">Mot de passe :</label>
+      <input type="password" class="form__input" v-model.trim="$v.mdp.$model"/>
+    </div>
+    <div class="error_1" v-if="!$v.mdp.required">Mot de passe requis</div>
+    <div class="error" v-if="!$v.mdp.minLength">Doit avoir au moins {{$v.mdp.$params.minLength.min}} caractères.</div>
   
-  <button  class="button seconnecter " type="submit" :disabled="submitStatus === 'PENDING'" >Se connecter</button>
-  <p class="typo__p1" v-if="submitStatus === 'OK'">Merci!</p>
-  <p class="typo__p2" v-if="submitStatus === 'ERROR'">Merci de renseigner correctement les champs.</p>
-  <p class="typo__p3" v-if="submitStatus === 'PENDING'">Envoi...</p>
+    <button  class="button seconnecter " type="submit" :disabled="submitStatus === 'PENDING'" >Se connecter</button>
+    <p class="typo__p1" v-if="submitStatus === 'OK'">Merci!</p>
+    <p class="typo__p2" v-if="submitStatus === 'ERROR'">Merci de renseigner correctement les champs.</p>
+    <p class="typo__p3" v-if="submitStatus === 'PENDING'">Envoi...</p>
  
-</form>
+  </form>
 </div>
 
 </template>
@@ -159,6 +159,9 @@ export default {
 </script>
 
 <style lang="scss">
+form{
+  margin-bottom:5%;
+}
 .error{
 	color:red;
 	&_1{
@@ -195,4 +198,6 @@ export default {
     border:blue;
     background-color: rgb(135, 192, 240);
   }
+
+
 </style>

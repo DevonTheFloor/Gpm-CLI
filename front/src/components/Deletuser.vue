@@ -39,12 +39,14 @@ export default {
 <style lang="scss">
 .deluse{
 	border: 1px solid red;
+	border-radius: 5px;
 	color: red;
 	&:hover{
 		background-color: red;
 		color: black;
 		border: 1px solid black;
 	}
+	margin: 5%;
 }
 </style>
 
