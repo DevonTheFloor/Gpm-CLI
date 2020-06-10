@@ -113,7 +113,7 @@ export default {
 	}
 }
 .stat{
-	width: 65%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-items: center;

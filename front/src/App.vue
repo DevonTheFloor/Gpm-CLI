@@ -1,8 +1,6 @@
 <template>
   <div id="app" class="container-fluid">
- 
       <router-view/>
-
   </div>
 </template>
 
@@ -65,5 +63,6 @@ section{
 .connectlate{
   border: 2px solid beige;
 }
+
 </style>
 

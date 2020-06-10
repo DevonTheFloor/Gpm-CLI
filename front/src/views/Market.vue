@@ -3,10 +3,10 @@
 	<Head page="http://localhost:8080/#/vous-etes-ici"/>
 	<nav class="menuMarket">
     <ol>
-      <li>Auto</li>
-      <li>Maison</li>
-      <li>Informatique</li>
-      <li>Autre</li>
+      <li class="classeur" @click="affAuto">Auto</li>
+      <li class="classeur">Maison</li>
+      <li class="classeur">Informatique</li>
+      <li class="classeur">Autre</li>
     </ol>
   </nav>
 
@@ -64,8 +64,8 @@ export default {
 			isadm:'',
 			idm:'',
 			token:'',
-			article:'',
-			annonceId: ''
+			article:''
+
 		}
 	},
 	methods:{
@@ -90,7 +90,23 @@ export default {
 			window.location.reload();
 			})
 			.catch(error =>{console.log(error)});
-		}
+		},
+		affAuto(){
+			this.axios.get("http://localhost:4040/api/market/classeur/:auto",{
+			headers:{
+				"Authorization":"Bearer "+this.token
+				}
+			})
+			.then(response => {
+			this.annonces = response.data,
+			console.log(response.data)
+			})
+			.catch(error =>{console.log(error)});
+		},
+		affInfo(){},
+		affMaison(){},
+		affAutre(){}
+
 	},
 	mounted(){
 		let isadm = localStorage.getItem('isadm');
@@ -153,10 +169,13 @@ ol{
 	width: 100%;
 }
 .showbloc{
-	width: 70%;
+	width: 90%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+}
+.classeur{
+	cursor: pointer;
 }
 
 </style>

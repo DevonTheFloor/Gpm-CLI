@@ -32,7 +32,7 @@ exports.postOne = (req,res,next)=>{
       connectdb.query(sql, function(err,result){
           if (err) throw err ;
           console.log("Article mit en vente");
-          res.redirect("http://localhost:8080/#/market-place");
+          res.status(201).json({message:"ressource créée"});
       });
     }else{
       let auteur = req.body.auteur;
@@ -59,6 +59,21 @@ exports.getOne = (req,res,next)=>{
   console.log("Connecté mySQL on GetOneMarket !!");
   var sql = "SELECT * FROM market WHERE _id=?";
   var inserts = [_id];
+  sql = mysql.format(sql,inserts);
+  connectdb.query(sql, function(err,result){
+    if (err) throw err ;
+    console.log("annonce trouvée");
+    res.status(200).json(result);
+    console.log("result = ",result);
+    });
+}
+
+exports.getAuto = (req,res,next)=>{
+  let categorie = req.params.id
+  console.log("cat = ",categorie);
+  console.log("Connecté mySQL on getAuto!!");
+  var sql = "SELECT * FROM market WHERE categorie=?";
+  var inserts = [categorie];
   sql = mysql.format(sql,inserts);
   connectdb.query(sql, function(err,result){
     if (err) throw err ;

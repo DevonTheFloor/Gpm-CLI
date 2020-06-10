@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : lun. 08 juin 2020 à 07:57
+-- Généré le : mer. 10 juin 2020 à 20:03
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP : 7.4.4
 
@@ -41,8 +41,7 @@ CREATE TABLE `forum` (
 --
 
 INSERT INTO `forum` (`_id`, `titre`, `auteur`, `message`, `urlimg`, `quand`) VALUES
-(14, 'oupss', 'test', 'test de modification', 'http://localhost:4040/api/images/dl/external-1589526604262.jpg', '2020-05-15 09:10:04'),
-(15, 'modif sql', 'lautre', 'modif de la requete sans le null (j\'ai remis)  et sans les default values', 'http://localhost:4040/api/images/dl/ordi21589527050016.jpg', '2020-05-15 09:17:30'),
+(14, 'oupss', 'admin1', 'test de modification \'plus un autre test de modif\'', 'http://localhost:4040/api/images/dl/external-1589526604262.jpg', '2020-05-15 09:10:04'),
 (16, 'sql sans variable', 'lautre', 'variable declareés avant values', 'http://localhost:4040/api/images/dl/voiture11589527484542.jpg', '2020-05-15 09:24:44'),
 (34, 'multi', 'test', 'direct bdd', 'http://localhost:4040/api/images/dl/chouette1591205748933.jpeg', '2020-06-03 19:35:48'),
 (35, 'Test admin', 'admin1', 'juste pour l\'image', 'http://localhost:4040/api/images/dl/51yg_dVT_AmFL1591364828687.jpeg', '2020-06-05 15:47:08'),
@@ -72,12 +71,12 @@ CREATE TABLE `market` (
 INSERT INTO `market` (`_id`, `auteur`, `titre`, `categorie`, `annonce`, `urlimg`, `quand`) VALUES
 (1, 'El punto final', 'Fiat punto grande', 'Auto', 'superbe fiat punto toi même tu vois frèrrrrr', 'https://voiture.kidioui.fr/image/img-auto/fiat-punto.jpg', '2020-05-01 18:08:01'),
 (2, 'Jean Jean', 'nouvelle annonce', 'maison', 'là il faut fair preuve d\'imagination pour dev un reseau tout seul', 'https://voiture.kidioui.fr/image/img-auto/fiat-punto.jpg', '2020-05-01 20:15:57'),
-(16, 'Christophe', 'encore', 'Auto', 'rateé? va savoir', 'http://localhost:4040/api/images/dl/voiture11589472074548.jpg', '2020-05-14 18:01:14'),
 (17, 'Jerôme', 'alors', 'Auto', 'apres j\'aiu plus d\'idée', 'http://localhost:4040/api/images/dl/voiture21589480453158.jpg', '2020-05-14 20:20:53'),
-(18, '', 'OYE', NULL, 'Como va', NULL, '2020-06-07 11:06:47'),
-(19, '', 'RE TEST', 'autre', 'olalalala', NULL, '2020-06-07 11:08:55'),
-(20, '', 'RE RE TEST', 'auto ', 'prout!', NULL, '2020-06-07 11:13:23'),
-(21, '', 'ou', 'auto ', 'la', NULL, '2020-06-07 11:26:28');
+(23, 'admin1', 'Petit maison', 'maison', 'Dans la prairie loin de tout', 'http://localhost:4040/api/images/dl/maison21591776043160.jpeg', '2020-06-10 10:00:43'),
+(24, 'Louison', 'Chalet ', 'maison', 'POur habiter à l\'année taxe d\'habitation 30€/an. Affaire à saisir!', 'http://localhost:4040/api/images/dl/maison11591776255520.jpeg', '2020-06-10 10:04:15'),
+(26, 'test', 'JEUX', 'autre', 'Nombreux jeux de société pour soirée d\'hiver', 'http://localhost:4040/api/images/dl/autre11591776426971.jpeg', '2020-06-10 10:07:06'),
+(27, 'Gooko', 'Ordi natan', 'infor', 'Olalala keske chu drôle!!', 'http://localhost:4040/api/images/dl/ordi21591776555082.png', '2020-06-10 10:09:15'),
+(28, 'Leonidas', 'Computer', 'infor', 'Mega ram, hypra processor', 'http://localhost:4040/api/images/dl/ordi31591776594810.jpeg', '2020-06-10 10:09:54');
 
 -- --------------------------------------------------------
 
@@ -133,7 +132,8 @@ INSERT INTO `reponse` (`_id`, `auteur`, `message`, `urlimg`, `id_question`, `sal
 (33, 'admin1', 'On va peut re s\'arrêter?', NULL, 35, 'forum', '2020-06-05 16:40:43'),
 (34, 'test', '', NULL, 34, 'forum', '2020-06-06 11:22:06'),
 (35, 'test', '', NULL, 45, 'forum', '2020-06-06 14:38:58'),
-(36, 'test', 'tentatuive de réponse pour voir', NULL, 45, 'forum', '2020-06-06 14:39:34');
+(36, 'test', 'tentatuive de réponse pour voir', NULL, 45, 'forum', '2020-06-06 14:39:34'),
+(37, 'admin1', 'message token', NULL, 14, 'forum', '2020-06-08 17:12:29');
 
 -- --------------------------------------------------------
 
@@ -143,8 +143,8 @@ INSERT INTO `reponse` (`_id`, `auteur`, `message`, `urlimg`, `id_question`, `sal
 
 CREATE TABLE `rezo` (
   `_id` int(11) NOT NULL,
-  `auteur` varchar(80) NOT NULL,
-  `message` text NOT NULL,
+  `auteur` varchar(80) DEFAULT NULL,
+  `message` text DEFAULT NULL,
   `quand` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -165,7 +165,31 @@ INSERT INTO `rezo` (`_id`, `auteur`, `message`, `quand`) VALUES
 (10, 'iuyt', 'message', '2020-05-11 10:16:12'),
 (11, 'jerome', 'ici ça merde aussi?', '2020-05-13 06:42:39'),
 (12, 'coucou', 'a toi', '2020-05-13 10:33:00'),
-(13, 'hello', 'where are you', '2020-05-13 14:06:00');
+(13, 'hello', 'where are you', '2020-05-13 14:06:00'),
+(15, 'admin1', 'req.body.message', '2020-06-08 10:25:50'),
+(25, NULL, NULL, '2020-06-09 16:29:00'),
+(26, NULL, NULL, '2020-06-09 16:30:05'),
+(27, NULL, NULL, '2020-06-09 16:36:17'),
+(28, NULL, NULL, '2020-06-09 16:41:28'),
+(29, NULL, NULL, '2020-06-09 16:42:15'),
+(30, NULL, NULL, '2020-06-09 16:43:28'),
+(31, 'the haakerz', 'vilain message from zi hakerzs', '2020-06-09 19:41:14'),
+(32, NULL, NULL, '2020-06-09 19:50:10'),
+(33, 'another', 'va savoir Charles', '2020-06-09 19:51:14'),
+(34, NULL, NULL, '2020-06-09 19:59:46'),
+(35, NULL, NULL, '2020-06-09 20:01:05'),
+(36, NULL, NULL, '2020-06-09 20:04:13'),
+(37, NULL, NULL, '2020-06-09 20:06:10'),
+(38, NULL, 'coiuc nous vouilou', '2020-06-09 20:16:05'),
+(39, 'Axux Malus', 'en direct du code dans axios', '2020-06-10 06:54:50'),
+(40, 'Le bricoleur', 'toujours en direct du code dans axios', '2020-06-10 07:00:55'),
+(41, 'Le bricoleur', 'Kesk kon est bien dans le code!!!', '2020-06-10 07:04:07'),
+(42, NULL, NULL, '2020-06-10 07:07:43'),
+(43, NULL, NULL, '2020-06-10 07:25:49'),
+(44, 'admin1', '', '2020-06-10 07:28:56'),
+(45, 'admin1', 'Ce coup  ci normalement c\'est le bon.', '2020-06-10 07:30:05'),
+(46, 'admin1', 'Pouquoi fd m\'a planté?\n', '2020-06-10 07:33:10'),
+(47, 'admin1', 'crotte de bique !!!!', '2020-06-10 12:35:50');
 
 -- --------------------------------------------------------
 
@@ -203,7 +227,6 @@ INSERT INTO `users` (`_id`, `email`, `mdp`, `isadm`) VALUES
 (45, 'test2', '$2b$10$lDNshhXPWDF714qfcUgTnOFN14stRHvXxUvxn6SZDz45DEFJZg8ey', 'false'),
 (46, 'test', '$2b$10$M5UvqCku.3mqeu3rxsqY.ONFzt21HVXgKaMT5d84g3Bql/1bPjmYe', 'false'),
 (47, 'test', '$2b$10$ZEcl976Gjd5WZHCmux2YFuwsubU52InrNgfueQ35ZyXuXzbTcU/AS', 'false'),
-(48, ' nouveau', '$2b$10$sD6DV8mSjatPsWqjehIP9u1b56mwAg18bGZQhYF2xpQUc2fyIcWZ6', 'false'),
 (49, 'test', '$2b$10$8Nek0qSWLbCLoYv6fOM1M.ikcFKjvb/VHVs/hHkag5LGvdkF9K9U2', 'false'),
 (60, 'alors', '$2b$10$MzHibh2R8xk2x0msEP6kNuRCU4G8HL6xDg83/l5fNVYwag8n1xkfK', 'false'),
 (61, 'admin1', '$2b$10$xzjAnnUq/ALuAQrv3OOGQegadFeNR3t70iZryC5wYzfQHMuZtHzSu', 'true'),
@@ -252,31 +275,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `forum`
 --
 ALTER TABLE `forum`
-  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT pour la table `market`
 --
 ALTER TABLE `market`
-  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT pour la table `reponse`
 --
 ALTER TABLE `reponse`
-  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT pour la table `rezo`
 --
 ALTER TABLE `rezo`
-  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

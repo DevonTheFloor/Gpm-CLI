@@ -104,7 +104,7 @@ export default {
   align-items: flex-start;
   border: 4px solid grey;
   background-color: beige;
-  width: 70%;
+  width: 80%;
   padding: 1%;
   margin: 1%;
 }
