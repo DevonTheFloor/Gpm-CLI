@@ -11,11 +11,17 @@
 
 	<footer class="messrezo justify-content-lg-center">
     <div class="col-lg-12">
-      <form id="chating">
+     <form enctype="multipart/form-data"  id="chating">
         <input type="hidden" id="auteur" name="auteur" :value="email">
         <label>Message: <textarea id="message" name="message" cols="50" v-model="message"></textarea></label>
         <button @click="chater">Chatez !</button>
       </form>
+
+        <!--<form action="http://localhost:4040/api/rezo/post" method="POST" enctype="multipart/form-data" id="chating">
+        <input type="hidden" id="auteur" name="auteur" value="Joe">
+        <label>Message: <textarea id="message" name="message" value="un message cool" cols="50"></textarea></label>
+        <button type="submit">form data</button>
+      </form>-->
     </div>
   </footer>
 	</div>
@@ -38,18 +44,21 @@ export default {
 		}
   },
   methods:{
+    /**
+     * reque pour poster un message dans le chat
+     */
     chater(e){
     e.preventDefault();
-    let chating = document.getElementById('chating');
-    let fd = new FormData(chating);
-    console.log('fd :',fd);
-
-    this.axios.post('http://localhost:4040/api/rezo/post',fd,{
+    this.axios.post('http://localhost:4040/api/rezo/post',{
+      auteur: this.email,
+      message: this.message
+    },{
       headers:{
-          "Authorization":"Bearer "+this.token
+          "Authorization":"Bearer "+this.token,
+          "Content-type":"application/json"
       }
     })
-    .then(()=>{console.log(this.message)})
+    .then(setTimeout(function(){window.location.reload() },1000))
     .catch(error =>{console.log(error)});
   }
   }

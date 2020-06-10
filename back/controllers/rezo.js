@@ -7,14 +7,13 @@ exports.getAll = (req,res,next)=>{
     var qy1 = "SELECT * FROM rezo";
     connectdb.query(qy1,function(err,result){
       if (err) throw err;
-      console.log(result);
       res.status(200).json(result);
     });
   }
 
 exports.postOne = (req,res,next)=>{
-    if(!req.file)
-    {let auteur = req.body.auteur;
+
+    let auteur = req.body.auteur;
     let message = req.body.message;
     console.log("req.body = ",req.body);
     console.log("Connected POST chat !!");
@@ -24,11 +23,9 @@ exports.postOne = (req,res,next)=>{
       connectdb.query(sql, function(err,result){
           if (err) throw err ;
           console.log("Message posté");
-          res.redirect("http://localhost:8080/#/chat-live");
+          res.status(201).json({message:"ressource créée"});
       });
-    }else {
-      res.status(204).json({message:"requête incorrecte"})
-    }
+
   }
 
   exports.statChat = (req,res,next)=> {

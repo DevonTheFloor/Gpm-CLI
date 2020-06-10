@@ -46,11 +46,12 @@ DELETE http://localhost:4040/api/market/deleteone/20
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMSIsImlhdCI6MTU5MTY3ODUzNiwiZXhwIjoxNTkxNzY0OTM2fQ.f9NJ_SJc0a2NtK6f1Jwi7VCkJFhyO_jPwC20yxr1ujs
 ###
 POST http://localhost:4040/api/rezo/post
+Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMSIsImlhdCI6MTU5MTY3ODUzNiwiZXhwIjoxNTkxNzY0OTM2fQ.f9NJ_SJc0a2NtK6f1Jwi7VCkJFhyO_jPwC20yxr1ujs
 
 {
-    "auteur":"the haakerz",
-    "message":"vilain message from zi hakerzs"
+    "auteur":"another",
+    "message":"va savoir Charles"
 }
 
 ###
