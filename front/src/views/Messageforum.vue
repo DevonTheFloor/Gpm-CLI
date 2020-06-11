@@ -222,7 +222,7 @@ export default {
 .modifForum{
   background-color:whitesmoke;
 }
-.responseforum{
-  width: 100%;
+.reponseForum{
+  width: 95%;
 }
 </style>

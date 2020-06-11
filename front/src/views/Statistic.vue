@@ -4,15 +4,15 @@
 		<section class="menuStat">
 			<h1>Statistique </h1>
 			<p>Liste des derniers messages des différents salons</p>
-			<h2 class="menuStat"> Forum :</h2>
+			<router-link to="/zi-forum" target="_blank">	<h2 class="menuStat"> Forum :</h2></router-link>
 			<div v-for="formsg in forst" :key="formsg.id" class="statp">
 			<div><p>n°: {{ formsg._id }} <i> Auteur</i> : {{ formsg.auteur }} <i>Titre</i> : {{ formsg.titre }}  <img :src="formsg.urlimg" class="mini"></p></div> <div> <a :href="'http://localhost:8080/#/voir-un-message?id='+formsg._id" target="_blank"><button class="voir">voir</button></a>  </div>
 			</div>
-			<h2 class="menuStat">Market place :</h2>
+			<router-link to="/markat-place">	<h2 class="menuStat">Market place :</h2></router-link>
 			<div v-for="makmsg in makst" :key="makmsg.id" class="statp">
 			<div><p>n°: {{ makmsg._id }} <i>De : </i> {{ makmsg.auteur }} <i>Categori : </i> <b>{{  makmsg.categorie }}</b> <i>titre : </i>{{  makmsg.titre }} <img :src="makmsg.urlimg" class="mini"></p></div><div> <a :href="'/#/voir-une-annonce?id='+makmsg._id" target="_blank"><button class="voir" >voir</button></a> </div>
 			</div>
-			<h2 class="menuStat">Chat :</h2>
+			<router-link to="/chat-live">	<h2 class="menuStat">Chat :</h2> </router-link>
 			<div v-for="chmsg in chst" :key="chmsg.id" class="statp">
 			<div><p>n°: {{ chmsg._id }} <i>De : </i> {{ chmsg.auteur }} <i> msg : </i> {{ chmsg.message }} </p> </div><div><a href="/#/chat-live" target="_blank"><button class="voir">voir</button></a></div>
 			</div>
@@ -94,6 +94,7 @@ export default {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	margin:2%;
 }
 .mini{
 	max-width: 5%;
