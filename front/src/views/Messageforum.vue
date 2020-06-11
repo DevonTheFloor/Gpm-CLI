@@ -24,7 +24,7 @@
           </form>
           
           <section class="reponseForum" v-for="res in resall" :key="res.id">
-            <div class="listForum" >
+            <div class="listForum responseforum" >
               <p>Par : {{ res.auteur }} </p>
               <p>le: {{ res.quand }} </p>
               <p class="msgForum"> {{ res.message }} </p>
@@ -221,5 +221,8 @@ export default {
 }
 .modifForum{
   background-color:whitesmoke;
+}
+.responseforum{
+  width: 100%;
 }
 </style>

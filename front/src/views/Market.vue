@@ -25,17 +25,16 @@
 	<section class="justify-content-lg-center">
 		<form enctype="multipart/form-data"  id="postannonce" v-show="seen" class="designform">
 			<input type="hidden" id="auteur" name="auteur" :value="auteur">
-			<label> Titre : <input type="text" id="titre" name="titre" v-model="titre"/></label>
-			<label> Annonce :<textarea id="annonce" name="annonce" ></textarea></label>
-			<label> Catégorie : 
+			<label for="titre"> Titre : </label><input type="text" id="titre" name="titre" v-model="titre"/>
+			<label for="annonce"> Annonce :</label><textarea id="annonce" name="annonce" ></textarea>
+			<label for="categorie"> Catégorie :   </label>
         <select id="categorie" name="categorie" v-model="categorie">
           <option value="auto ">Auto</option>
           <option value="maison">Maison</option>
           <option value="infor">Informatique</option>
           <option value="autre">Autre</option>
         </select> 
-      </label>
-			<label> Photo: <input type="file" id="file" name="file"/></label>
+			<label for="file"> Photo: </label><input type="file" id="file" name="file"/>
 			<button @click="annoncer"> Annoncer !</button>
 		</form>
 	</section>
