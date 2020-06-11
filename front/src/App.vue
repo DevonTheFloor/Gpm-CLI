@@ -63,6 +63,12 @@ section{
 .connectlate{
   border: 2px solid beige;
 }
+.designform{
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+}
+
 
 </style>
 

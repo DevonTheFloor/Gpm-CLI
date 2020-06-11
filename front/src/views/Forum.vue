@@ -2,12 +2,12 @@
   
     <div class="forum justify" >
       <Head page="/#/vous-etes-ici"/>
-      <form v-show="seen" enctype="multipart/form-data" id="formpost">
+      <form v-show="seen" enctype="multipart/form-data" id="formpost" class="designform">
         <input type="hidden" id="auteur" name="auteur" :value="auteur">
-        <label>Titre : <input type="text" id="titre" name="titre" v-model="titre"> </label>
-        <label>Message : <textarea id="message" name="message" v-model="message"></textarea> </label>
+        <label for="titre">Titre : </label> <input type="text" id="titre" name="titre" v-model="titre"> 
+        <label for="message">Message : </label> <textarea id="message" name="message" v-model="message" cols="200"></textarea> 
         <input type="file" id="file" @change="onFileSelected"/>
-        <button @click="poster">POSTER</button>
+        <button @click="poster">FORUMER !</button>
       </form>
   
     <section v-if="seeAll">

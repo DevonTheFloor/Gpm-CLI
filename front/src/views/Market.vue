@@ -23,8 +23,8 @@
 	</div>
 
 	<section class="justify-content-lg-center">
-		<form enctype="multipart/form-data"  id="postannonce" v-show="seen">
-			<input type="hidden" id="auteur" name="auteur" :value="email">
+		<form enctype="multipart/form-data"  id="postannonce" v-show="seen" class="designform">
+			<input type="hidden" id="auteur" name="auteur" :value="auteur">
 			<label> Titre : <input type="text" id="titre" name="titre" v-model="titre"/></label>
 			<label> Annonce :<textarea id="annonce" name="annonce" ></textarea></label>
 			<label> Catégorie : 
