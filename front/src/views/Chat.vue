@@ -61,7 +61,7 @@ export default {
     this.email = email;
     let token = localStorage.getItem('token');
     this.token = token;
-    if(token == null){
+    if(!token){
       window.history.back();
       }
 
@@ -98,7 +98,7 @@ export default {
 	width: 70%;
 }
 .headchat{
-  margin: 5%;
+  margin-bottom: 5%;
 }
 .messchat{
   margin-bottom: 1%;

@@ -50,7 +50,7 @@ export default {
     this.isadm = isadm;
     let token = localStorage.getItem('token');
     this.token = token;
-    if(token == null){
+    if(!token){
       window.history.back();
       }
     //récupération de l'id du message dans l'url
