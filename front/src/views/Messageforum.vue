@@ -32,7 +32,7 @@
               <p> </p>
             </div>
           </section>
-          <section>
+          <section class="stylrep">
             <form class="repForum" enctype="multipart/form-data" id="formRepForum" v-if="master">
               <input type="hidden" id="salon" name="salon" v-model="salon">
               <input type="hidden" id="id_question" name="id_question" :value="id_question">
@@ -224,5 +224,9 @@ export default {
 }
 .reponseForum{
   width: 95%;
+}
+.stylrep{
+  width: 95%;
+
 }
 </style>

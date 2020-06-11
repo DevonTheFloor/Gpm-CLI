@@ -2,9 +2,8 @@
 <div class="justify">	
   <Head class="headchat" page="http://localhost:8080/#/vous-etes-ici"/>
   <section class="justify-content-lg-center formForum chat"  id="message">
-    <div v-for="tweet in chat" :key="tweet.id">
-      <p>{{tweet.auteur}}</p>
-      <p>{{tweet.quand}}</p>
+    <div v-for="tweet in chat" :key="tweet.id" class="messchat">
+      <p>{{tweet.auteur}} le {{tweet.quand}}</p>
       <p> {{tweet.message}}</p>
     </div>
   </section>
@@ -82,11 +81,11 @@ export default {
 <style lang="scss">
 .chat{
   border: 3px solid grey;
-  background-color: gainsboro;
+  background-color: rgb(241, 235, 235);
   margin-bottom: 10%;
   position: fixed;
-  top:100px;
-  max-height: 70%;
+  top:200px;
+  max-height: 60%;
   min-width: 85%;
   overflow: scroll;
 }
@@ -99,6 +98,9 @@ export default {
 	width: 70%;
 }
 .headchat{
-  margin: 5px;
+  margin: 5%;
+}
+.messchat{
+  margin-bottom: 1%;
 }
 </style>
