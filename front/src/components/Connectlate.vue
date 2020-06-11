@@ -22,7 +22,7 @@
   
  
     <button class="button senregistrer" type="submit" :disabled="submitStatus === 'PENDING'">S'enregistrer</button>
-    <p class="typo__p1" v-if="submitStatus === 'OK'">Merci!</p>
+    <!--<p class="typo__p1" v-if="submitStatus === 'OK'">Merci!</p>-->
     <p class="typo__p2" v-if="submitStatus === 'ERROR'">Merci de renseigner correctement les champs.</p>
     <p class="typo__p3" v-if="submitStatus === 'PENDING'">Envoi...</p>
   </form>
@@ -43,7 +43,7 @@
     <div class="error" v-if="!$v.mdp.minLength">Doit avoir au moins {{$v.mdp.$params.minLength.min}} caractères.</div>
   
     <button  class="button seconnecter " type="submit" :disabled="submitStatus === 'PENDING'" >Se connecter</button>
-    <p class="typo__p1" v-if="submitStatus === 'OK'">Merci!</p>
+    <!--<p class="typo__p1" v-if="submitStatus === 'OK'">Merci!</p>-->
     <p class="typo__p2" v-if="submitStatus === 'ERROR'">Merci de renseigner correctement les champs.</p>
     <p class="typo__p3" v-if="submitStatus === 'PENDING'">Envoi...</p>
  
@@ -133,14 +133,16 @@ export default {
         }
       this.axios.post('http://localhost:4040/api/auth/login',loginfo
         )
-          .then(function(response) {
+          .then(async function(response) {
             console.log(response.data),
-            localStorage.setItem("email",response.data.email),
-            localStorage.setItem("token",response.data.token),
-            localStorage.setItem('idu',response.data.idu),
-            localStorage.setItem('isadm',response.data.isadm)
+            await localStorage.setItem("email",response.data.email),
+            await localStorage.setItem("token",response.data.token),
+            await localStorage.setItem('idu',response.data.idu),
+            await localStorage.setItem('isadm',response.data.isadm)
             })
-            .then(setTimeout(function(){  window.location.assign('http://localhost:8080/#/vous-etes-ici') },1300))
+          //.then(setTimeout(function(){  window.location.assign('http://localhost:8080/#/vous-etes-ici') },1300))
+          .then(()=>{ window.location.assign('http://localhost:8080/#/vous-etes-ici') })
+
           .catch(function (error) {
             console.log(error);
             });
@@ -198,6 +200,4 @@ form{
     border:blue;
     background-color: rgb(135, 192, 240);
   }
-
-
 </style>
