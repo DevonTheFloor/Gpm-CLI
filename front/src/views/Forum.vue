@@ -2,6 +2,7 @@
   
     <div class="forum justify" >
       <Head page="/#/vous-etes-ici"/>
+      <!-- formulaire pour poster un message dans le forum -->
       <form v-show="seen" enctype="multipart/form-data" id="formpost" class="designform">
         <input type="hidden" id="auteur" name="auteur" :value="auteur">
         <label for="titre">Titre : </label> <input type="text" id="titre" name="titre" v-model="titre"> 
@@ -12,7 +13,7 @@
   
     <section v-if="seeAll">
       <button id="postforum" @click="seeform">Poster un message</button>
-
+      <!-- affichage de tous les message du forum -->
       <div class="listForum" v-for="item in info" :key="item.id">
         <a :href="'http://localhost:8080/#/voir-un-message?id='+item._id"><h2> {{ item.titre }} </h2></a>
         <p>par:  {{ item.auteur }} </p>
@@ -60,6 +61,9 @@ export default {
         console.log(email);
         let formpost = document.getElementById('formpost')
         let fd = new FormData(formpost);
+        /**
+         * requête POST pour poster un message dans le forum
+         */
         this.axios.post("http://localhost:4040/api/forum/post",fd,
           {
             headers:{

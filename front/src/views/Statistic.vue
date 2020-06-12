@@ -4,14 +4,17 @@
 		<section class="menuStat">
 			<h1>Statistique </h1>
 			<p>Liste des derniers messages des différents salons</p>
+			<!--affichage des 7derniers messages de la table forum -->
 			<router-link to="/zi-forum" target="_blank">	<h2 class="menuStat"> Forum :</h2></router-link>
 			<div v-for="formsg in forst" :key="formsg.id" class="statp">
 			<div><p>n°: {{ formsg._id }} <i> Auteur</i> : {{ formsg.auteur }} <i>Titre</i> : {{ formsg.titre }}  <img :src="formsg.urlimg" class="mini"></p></div> <div> <a :href="'http://localhost:8080/#/voir-un-message?id='+formsg._id" target="_blank"><button class="voir">voir</button></a>  </div>
 			</div>
+			<!--affichage des 7derniers messages de la table market place -->
 			<router-link to="/markat-place">	<h2 class="menuStat">Market place :</h2></router-link>
 			<div v-for="makmsg in makst" :key="makmsg.id" class="statp">
 			<div><p>n°: {{ makmsg._id }} <i>De : </i> {{ makmsg.auteur }} <i>Categori : </i> <b>{{  makmsg.categorie }}</b> <i>titre : </i>{{  makmsg.titre }} <img :src="makmsg.urlimg" class="mini"></p></div><div> <a :href="'/#/voir-une-annonce?id='+makmsg._id" target="_blank"><button class="voir" >voir</button></a> </div>
 			</div>
+			<!--affichage des 7derniers messages de la table rezo -->
 			<router-link to="/chat-live">	<h2 class="menuStat">Chat :</h2> </router-link>
 			<div v-for="chmsg in chst" :key="chmsg.id" class="statp">
 			<div><p>n°: {{ chmsg._id }} <i>De : </i> {{ chmsg.auteur }} <i> msg : </i> {{ chmsg.message }} </p> </div><div><a href="/#/chat-live" target="_blank"><button class="voir">voir</button></a></div>
@@ -36,17 +39,13 @@ export default {
 		}
 	},
 	methods:{
-		delmsgforum(){
-			let formsg = this.forst;
-			let idm = formsg._id;
-			console.log(idm);},
-		delmsgmarket(){},
-		delmsgchat(){}
 	},
 	mounted(){
 
 		let token = localStorage.getItem('token');
-
+		/**
+		 * requête GET pour les 7 derniers message du forum
+		 */
 		this.axios.get('http://localhost:4040/api/forum/forumStat',{
 			headers:{
 				"Authorization":"Bearer "+token
@@ -57,7 +56,9 @@ export default {
 			console.log("forst:",this.forst)
 		})
 		.catch(error =>{console.log(error)});
-
+		/**
+		 * requête GET pour les 7 derniers message du market place
+		 */
 		this.axios.get('http://localhost:4040/api/market/marketStat',{
 			headers:{
 				"Authorization":"Bearer "+token
@@ -68,8 +69,10 @@ export default {
 			console.log('makst :',this.makst)
 		})
 		.catch(error =>{console.log(error)});
-
-				this.axios.get('http://localhost:4040/api/rezo/chatStat',{
+			/**
+			 * requête GET pour les 7 derniers message du chat
+			 */
+			this.axios.get('http://localhost:4040/api/rezo/chatStat',{
 			headers:{
 				"Authorization":"Bearer "+token
 			}

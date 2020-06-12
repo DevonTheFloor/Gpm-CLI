@@ -2,6 +2,7 @@
 	<div class="annonce">
 		<Head page='/#/market-place'/>
 			<section class="listForum annonceone">
+				<!--affichage de tous les messages du market place -->
 				<div v-for="item in annonce" :key="item.id">
 					<button class="dbtna" v-if="isadm == 'true' || email == annonce.auteur" @click="deletemsg">x</button>
 					<h2> {{ item.titre }} </h2>
@@ -25,7 +26,8 @@ export default {
 			annonce:'',
 			isadm:'',
 			token:'',
-			id:''
+			id:'',
+			email:''
 		}
 	},
 	methods:{
@@ -46,6 +48,8 @@ export default {
 	},
 	mounted(){
 		console.log('MOUNTED !!');
+		let email = localStorage.getItem('email');
+		this.email = email;
 		let isadm = localStorage.getItem('isadm');
     this.isadm = isadm;
     let token = localStorage.getItem('token');

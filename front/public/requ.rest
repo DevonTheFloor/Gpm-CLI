@@ -59,3 +59,12 @@ GET http://localhost:4040/api/market/see/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMSIsImlhdCI6MTU5MTc2NDY5MywiZXhwIjoxNTkxODUxMDkzfQ.nIb436DB4wNmXEAGB5lwxbJGv8XfhXl3xA6VcB77riQ
 
 ###
+POST http://localhost:4040/api/market/classeur
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QiLCJpYXQiOjE1OTE5NTcyNzcsImV4cCI6MTU5MjA0MzY3N30.sYY9cB0TJxV-nCD_RKxaJ5RhBKuHnbdhd0x9uNy4k2Q
+
+{
+    "catégorie":"auto"
+}
+
+###

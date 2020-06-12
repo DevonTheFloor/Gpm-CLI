@@ -68,8 +68,9 @@ exports.getOne = (req,res,next)=>{
     });
 }
 
-exports.getAuto = (req,res,next)=>{
-  let categorie = req.params.id
+exports.selectCat = (req,res,next)=>{
+  let categorie = req.body.categorie;
+  console.log("OK KAT");
   console.log("cat = ",categorie);
   console.log("Connecté mySQL on getAuto!!");
   var sql = "SELECT * FROM market WHERE categorie=?";
@@ -77,7 +78,7 @@ exports.getAuto = (req,res,next)=>{
   sql = mysql.format(sql,inserts);
   connectdb.query(sql, function(err,result){
     if (err) throw err ;
-    console.log("annonce trouvée");
+    console.log("annonces classée par categorie trouvée");
     res.status(200).json(result);
     console.log("result = ",result);
     });

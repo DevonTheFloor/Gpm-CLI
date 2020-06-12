@@ -3,7 +3,7 @@
 	<div id="getOne" class=" Messageforum justify" >
     <Head page='/#/zi-forum'/>
     <section class=" col-lg-10" v-for="item in info" :key="item.id">
-
+      <!--affichage d'un message du forum en fonctio de son id -->
       <div class="listForum">
         <button v-show="item.auteur == auteur || isadm == 'true'" @click="deletemsg" class="dbtna">x</button>
         <button v-show="item.auteur == auteur || isadm == 'true'" @click="seemodifier" class="dbtnm">modifier</button>
@@ -13,6 +13,7 @@
         <p class="msgForum"> {{ item.message }} </p>
         <p><img :src="item.urlimg" class="imgMsg"></p>
         <p> </p>
+        <!-- formulaire de modification du message principal-->
          <form class="modifForum" enctype="multipart/form-data" id="formModifieur" v-show="seemodif">
             <input type="hidden" id="titre" name="titre" v-model="item.titre">
             <input type="hidden" id="salon" name="salon" v-model="salon">
@@ -22,7 +23,7 @@
             <label> Fichier : <input type="file" id="file" name="file"> </label>
             <button @click="modifierForum"> Modifier</button>
           </form>
-          
+          <!-- affichege des reponses au message du forum -->
           <section class="reponseForum" v-for="res in resall" :key="res.id">
             <div class="listForum responseforum" >
               <p>Par : {{ res.auteur }} </p>
@@ -33,6 +34,7 @@
             </div>
           </section>
           <section class="stylrep">
+            <!-- formulaire du reponse au message -->
             <form class="repForum" enctype="multipart/form-data" id="formRepForum" v-if="master">
               <input type="hidden" id="salon" name="salon" v-model="salon">
               <input type="hidden" id="id_question" name="id_question" :value="id_question">
@@ -79,6 +81,9 @@ export default {
         let formModifieur = document.getElementById('formModifieur');
         let fdm = new FormData(formModifieur);
         console.log(fdm);
+        /**
+         * requête PUT pour modifier le message principal du forum
+         */
         this.axios.put('http://localhost:4040/api/forum/modifier',fdm,{
            headers:{
              "Authorization":"Bearer "+this.token
@@ -110,6 +115,9 @@ export default {
           console.log('name: ',name);
           let postreponse = document.getElementById('formRepForum');
           const fd = new FormData(postreponse);
+          /**
+           * requête POST pour répondre dans le forum
+           */
          this.axios.post("http://localhost:4040/api/forum/reponse",fd,{
             headers:{
               "Authorization":"Bearer "+token,
@@ -128,6 +136,10 @@ export default {
           let token = localStorage.getItem('token');
           token;
           console.log('CLICKING !!')
+          /**
+           * requête DELETE pour effacer le message principal du forum
+           * @param number
+           */
           this.axios.delete('http://localhost:4040/api/forum/deleteone/'+idm,{
             headers:{
              "Authorization":"Bearer "+token

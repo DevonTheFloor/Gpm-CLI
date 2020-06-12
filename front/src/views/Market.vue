@@ -4,14 +4,14 @@
 	<nav class="menuMarket">
     <ol>
       <li class="classeur" @click="affAuto">Auto</li>
-      <li class="classeur">Maison</li>
-      <li class="classeur">Informatique</li>
-      <li class="classeur">Autre</li>
+      <li class="classeur" @click="affMaison">Maison</li>
+      <li class="classeur" @click="affInfo">Informatique</li>
+      <li class="classeur" @click="affAutre">Autre</li>
     </ol>
   </nav>
 
   <button id="addAnnonce" @click="seeForm">Poster une annonce</button>
-
+<!-- affichage des mannonces du market place -->
 	<div v-show="visible" class="showbloc" >
 		<section  v-for="article in annonces" :key="article.id">
     <div class="listForum">
@@ -21,7 +21,7 @@
     </div>
     </section>
 	</div>
-
+	<!-- formulaire pour poster une annonce -->
 	<section class="justify-content-lg-center">
 		<form enctype="multipart/form-data"  id="postannonce" v-show="seen" class="designform">
 			<input type="hidden" id="auteur" name="auteur" :value="auteur">
@@ -58,7 +58,7 @@ export default {
 			annonces:'',
 			categorie:'',
 			auteur:'',
-			email:'',
+			//email:'',
 			titre:'',
 			isadm:'',
 			idm:'',
@@ -78,6 +78,9 @@ export default {
 			let email = localStorage.getItem('email');
 			this.auteur = email;
 			let fd = new FormData(annoncer);
+			/**
+			 * requête POST pour poster une annonce dans le market place
+			 */
 			this.axios.post("http://localhost:4040/api/market/post",fd,{
 			headers:{
 				"Authorization":"Bearer "+this.token
@@ -90,8 +93,13 @@ export default {
 			})
 			.catch(error =>{console.log(error)});
 		},
+		/**
+		 * affchage de la categorie auto dans la liste de market place
+		 */
 		affAuto(){
-			this.axios.get("http://localhost:4040/api/market/classeur/:auto",{
+			this.axios.post("http://localhost:4040/api/market/classeur",{
+				categorie:"auto"
+			},{
 			headers:{
 				"Authorization":"Bearer "+this.token
 				}
@@ -102,12 +110,61 @@ export default {
 			})
 			.catch(error =>{console.log(error)});
 		},
-		affInfo(){},
-		affMaison(){},
-		affAutre(){}
+		/**
+		 * affiche de la categorie informatique du market place
+		 */
+		affInfo(){
+			this.axios.post("http://localhost:4040/api/market/classeur",{
+				categorie:"infor"
+			},{
+			headers:{
+				"Authorization":"Bearer "+this.token
+				}
+			})
+			.then(response => {
+			this.annonces = response.data,
+			console.log(response.data)
+			})
+			.catch(error =>{console.log(error)});
+		},
+		/**
+		 * affichege de la categorie maison du market place
+		 */
+		affMaison(){
+			this.axios.post("http://localhost:4040/api/market/classeur",{
+				categorie:"maison"
+			},{
+			headers:{
+				"Authorization":"Bearer "+this.token
+				}
+			})
+			.then(response => {
+			this.annonces = response.data,
+			console.log(response.data)
+			})
+			.catch(error =>{console.log(error)});
+		},
+		/**
+		 * affichage de la categorie autre du market place
+		 */
+		affAutre(){
+			this.axios.post("http://localhost:4040/api/market/classeur",{
+				categorie:"autre"
+			},{
+			headers:{
+				"Authorization":"Bearer "+this.token
+				}
+			})
+			.then(response => {
+			this.annonces = response.data,
+			console.log(response.data)
+			})
+			.catch(error =>{console.log(error)});
+		}
 
 	},
 	mounted(){
+		//recuêration de variables dans le local storage
 		let isadm = localStorage.getItem('isadm');
 		this.isadm= isadm;
 		let email = localStorage.getItem('email');
@@ -117,6 +174,9 @@ export default {
 			if(!token){
 				window.history.back();
 			}
+			/**
+			 * requête GET pour récupérer tous les messages du market place
+			 */
 		this.axios.get("http://localhost:4040/api/market/all",{
 			headers:{
 				"Authorization":"Bearer "+token
