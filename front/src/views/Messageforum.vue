@@ -34,7 +34,7 @@
             </div>
           </section>
           <section class="stylrep">
-            <!-- formulaire du reponse au message -->
+            <!-- formulaire de reponse au message -->
             <form class="repForum" enctype="multipart/form-data" id="formRepForum" v-if="master">
               <input type="hidden" id="salon" name="salon" v-model="salon">
               <input type="hidden" id="id_question" name="id_question" :value="id_question">
@@ -71,7 +71,8 @@ export default {
         salon:'forum',
         seemodif: false,
         master: true,
-        message:''
+        message:'',
+        resall:''
       }
     },
        
@@ -89,8 +90,9 @@ export default {
              "Authorization":"Bearer "+this.token
            }
          })
-         .then(()=>{console.log('modifié'),location.reload()})
-         .catch(error => {console.log(error)});
+         .then(()=>{console.log('modifié')})
+         .catch(error => {console.log(error)})
+          location.reload();
         },
       seemodifier(){
         this.seemodif = true;
@@ -125,8 +127,9 @@ export default {
               'Content-Type': 'multipart/form-data'
             }
           })
-          .then(() => {console.log('ok')})
-          .catch(error => {console.log(error)});
+          .then(() => {console.log('reloaded')})
+          .catch(error => {console.log(error)})
+          location.reload();
         },
       deletemsg(){
           console.log('COUCOU');
@@ -157,7 +160,7 @@ export default {
         let token = localStorage.getItem('token');
         this.token = token;
         if(!token){
-          window.history.back();
+          window.location('/');
           }
         //récupération de l'id du message dans l'url
         let uri1 = document.location.href;
@@ -177,9 +180,9 @@ export default {
             "Authorization":"Bearer "+token
           }
         })
-        .then(response=>{
-          this.info = response.data;
-          console.log(response.data);
+        .then(async response=>{
+          this.info = response.data,
+          await console.log(response.data);
           })
           .catch(function (error) {console.log(error);
 					})
@@ -193,10 +196,10 @@ export default {
               "Authorization":"Bearer "+token
             }
         })
-          .then(response => {
-            console.log("resAll :",response );
+          .then(async response => {
+            await console.log("resAll :",response ),
             this.resall = response.data;
-            console.log("resAll:" ,response.data)})
+            await console.log("resAll:" ,response.data)})
           .catch(error => {console.log(error)});
       } 
   }

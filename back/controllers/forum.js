@@ -85,7 +85,7 @@ exports.resForum = (req,res,next)=>{
         connectdb.query(sql, function(err,result){
             if (err) throw err ;
 						console.log("Reponse posté");
-						res.redirect('http:/localhost:8080/#/voir-un-message'+id_question);
+						res.redirect('http://localhost:8080/#/voir-message'+id_question);
         });
     }else{
         console.log('connecté response sans IMG');
@@ -172,7 +172,8 @@ exports.modifyOne = (req,res,next)=>{
         connectdb.query(sql, function(err,result){
             if (err) throw err ;
             console.log("Message posté");
-            res.status(202).json({message:'Request accepted'});
+						//res.status(202).json({message:'Request accepted'});
+						res.redirect('http://localhost:8080/#/voir-un-message'+_id);
         });
     } else {
         console.log('Connect MODIF sans IMG')
@@ -187,7 +188,8 @@ exports.modifyOne = (req,res,next)=>{
         connectdb.query(sql, function(err,result){
             if (err) throw err ;
             console.log("Message posté");
-            res.status(202).json({message:'Request accepted'});
+						//res.status(202).json({message:'Request accepted'});
+						res.redirect('http://localhost:8080/#/voir-un-message'+_id);
             });
         };
  }

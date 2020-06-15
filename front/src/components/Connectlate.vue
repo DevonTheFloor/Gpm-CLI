@@ -59,8 +59,8 @@ import { required, minLength } from 'vuelidate/lib/validators'
 export default {
   data() {
     return {
-      sign: true,
-      login:false,
+      sign: false,
+      login:true,
       email: '',
       mdp: '',
       submitStatus: null,
@@ -79,8 +79,8 @@ export default {
   },
   methods: {
     seesign(){
-      this.sign = true;
-      this.login = false;
+      this.sign = false;
+      this.login = true;
     },
     seelog(){
       this.sign = false;

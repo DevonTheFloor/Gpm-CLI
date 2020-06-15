@@ -7,7 +7,8 @@
         <input type="hidden" id="auteur" name="auteur" :value="auteur">
         <label for="titre">Titre : </label> <input type="text" id="titre" name="titre" v-model="titre"> 
         <label for="message">Message : </label> <textarea id="message" name="message" v-model="message" cols="200"></textarea> 
-        <input type="file" id="file" @change="onFileSelected"/>
+        <!--<input type="file" id="file" @change="onFileSelected"/>-->
+        <input type="file" id="file" name="file">
         <button @click="poster">FORUMER !</button>
       </form>
   
@@ -73,7 +74,7 @@ export default {
           })
           .then(response =>{console.log(response)})
           .catch(error => {console.log(error)});
-          location.reload(); 
+          location.reload();
         }
     },
     mounted(){
